@@ -23,7 +23,7 @@ if (isset($_SESSION["usuario"])) {
                     <p>Email: <strong><?php echo $_SESSION["usuario"] ["estado"] == 0 ? $_SESSION["usuario"]["usuario"].'@rrhh.com' : $_SESSION["usuario"] ["estado"]; ?></strong></p>
                     <P>
                         <p>IP: <strong><?php echo gethostbyname(gethostname()); ?></strong></p>
-                        <a href="cerrar-sesion.php" class="btn btn-primary btn-lg">Cerrar sesión</a>
+<!--                        <a href="cerrar-sesion.php" class="btn btn-primary btn-lg">Cerrar sesión</a>-->
                     </p>
                 </div>
             </div>

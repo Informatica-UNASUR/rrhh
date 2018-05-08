@@ -1,13 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Jose
- * Date: 26/2/2018
- * Time: 17:17
- */
-
 include 'Conexion.php';
 include '../entidades/Usuario.php';
+include '../entidades/Rol.php';
 
 class UsuarioDao extends Conexion {
     protected static $conexion;
@@ -76,7 +70,6 @@ class UsuarioDao extends Conexion {
         $pass   = $usuario->getPassword();
         $estado = $usuario->getEstado();
         $fechaAlta = date("d")."-".date("m")."-".date("Y");
-        print_r($fechaAlta);
         $query = "INSERT INTO rrhh_db.usuario VALUES ('$user', '$pass','$fechaAlta', '$estado')";
 
         self::getConexion();
@@ -89,4 +82,19 @@ class UsuarioDao extends Conexion {
         return false;
     }
 
+    public static function registrarRol($rol) {
+        $nombre      = $rol->getNombre();
+        $descripcion = $rol->getDescripcion();
+
+        $query = "INSERT INTO rrhh_db.rol VALUES ('$nombre', '$descripcion')";
+
+        self::getConexion();
+
+        $resultado = sqlsrv_query(self::$conexion, $query) or die( print_r( sqlsrv_errors(), true));
+
+        if($resultado) {
+            return true;
+        }
+        return false;
+    }
 }

@@ -24,4 +24,11 @@ class UsuarioControlador {
         $obj_usuario->setEstado($estado);
         return UsuarioDao::registrar($obj_usuario);
     }
+
+    public static function registrarRol($nombreRol, $descripcion) {
+        $obj_Rol = new Rol();
+        $obj_Rol->setNombre($nombreRol);
+        $obj_Rol->setDescripcion($descripcion);
+        return UsuarioDao::registrarRol($obj_Rol);
+    }
 }

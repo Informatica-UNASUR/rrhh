@@ -12,7 +12,7 @@
             </div>
         </div>
 
-        <!-- Modal Login -->
+<!--         Modal Login -->
         <div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="modalLoginTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">

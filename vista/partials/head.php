@@ -14,7 +14,7 @@
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/overhang.min.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/signin.css" />
-    <link rel="stylesheet" type="text/css" href="../img/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome/css/font-awesome.min.css">
 
     <!-- Custom styles for this template -->
     <style>
