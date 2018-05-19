@@ -5,6 +5,7 @@
 <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="assets/js/overhang.min.js"></script>
 <script src="assets/js/app.js"></script>
+<script src="assets/js/script.js"></script>
 </body>
 
 </html>

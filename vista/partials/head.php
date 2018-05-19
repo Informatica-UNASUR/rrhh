@@ -11,21 +11,23 @@
     <title>rrhh.com</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/overhang.min.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/signin.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
 
     <!-- Custom styles for this template -->
     <style>
-        body {
+        /*body {
             padding-top: 54px;
         }
         @media (min-width: 992px) {
             body {
                 padding-top: 56px;
             }
-        }
+        }*/
     </style>
 
 </head>

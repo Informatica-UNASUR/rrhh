@@ -27,7 +27,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 //                "usuario"   =>$usuario->getUsuario(),
 //                "estado"    =>$usuario->getEstado(),
 //            );
-            header("location:admin.php");
+            header("location:user.php");
         }
     }
 } else {

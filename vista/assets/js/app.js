@@ -1,15 +1,15 @@
 // Conexion a ajax por medio de jquery
 // Contendra todo el archivo de configuracion por medio de ajax
 $(document).ready(function() {
-    // Cuando se envie el form de login automaticamente se ejecute el ajax
-    $("#login").bind("submit", function () { //.bind captura un evento submit y ejecuta algo
+    // Cuando se envie el form de loginForm automaticamente se ejecute el ajax
+    $("#loginForm").bind("submit", function () { //.bind captura un evento submit y ejecuta algo
         $.ajax({
             type: $(this).attr("method"),   // Captura el atributo del form, POSt
             url: $(this).attr("action"),    // Obtiene validarCode.php
             data: $(this).serialize(),      // los campos a recuperar
             beforeSend: function () {
-                $("#login button[type=submit]").html("Enviando...");
-                $("#login button[type=submit]").attr("disabled", "disabled");
+                $("#loginForm button[type=submit]").html("Enviando...");
+                $("#loginForm button[type=submit]").attr("disabled", "disabled");
             },
             success: function (response) {
                 console.log(response);
@@ -27,19 +27,60 @@ $(document).ready(function() {
                         message: "Usuario o password incorrectos!"
                     });
                 }
-                $("#login button[type=submit]").html("Ingresar");
-                $("#login button[type=submit]").removeAttr("disabled");
+                $("#loginForm button[type=submit]").html("Ingresar");
+                $("#loginForm button[type=submit]").removeAttr("disabled");
             },
             error: function() {
                 $("body").overhang({
                     type: "error",
                     message: "Usuario o password incorrectos!",
                 });
-                $("#login button[type=submit]").html("Ingresar");
-                $("#login button[type=submit]").removeAttr("disabled");
+                $("#loginForm button[type=submit]").html("Ingresar");
+                $("#loginForm button[type=submit]").removeAttr("disabled");
 
             }
         });
        return false;
     }); // Captura el evento
+
+    // Activa boton si no estan vacios
+    $("#loginForm input").keyup(function () {
+        var form = $(this).parents("#loginForm");
+        var check = checkCampos(form);
+        console.log(check);
+        if(check) {
+            $("#ingresar").prop("disabled", false);
+        } else {
+            // $("#ingresar").
+            $("#ingresar").prop("disabled", true);
+        }
+    });
+
+    // Funcion a mejorar
+    $("#editarRol input").keyup(function () {
+        var form = $(this).parents("#editarRol");
+        var check = checkCampos(form);
+        console.log(check);
+        if(check) {
+            $("#actualizarRol").prop("disabled", false);
+        } else {
+            $("#actualizarRol").prop("disabled", true);
+        }
+    });
 });
+
+function checkCampos(obj) {
+    var camposRellenados = true;
+    obj.find("input").each(function () {
+        var $this = $(this);
+        if($this.val().length <= 0) {
+            camposRellenados = false;
+            return false;
+        }
+    });
+    if(camposRellenados == false) {
+        return false;
+    } else {
+        return true;
+    }
+}

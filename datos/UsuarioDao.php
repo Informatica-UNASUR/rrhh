@@ -2,6 +2,7 @@
 include 'Conexion.php';
 include '../entidades/Usuario.php';
 include '../entidades/Rol.php';
+include '../entidades/Departamento.php';
 
 class UsuarioDao extends Conexion {
     protected static $conexion;
@@ -19,20 +20,31 @@ class UsuarioDao extends Conexion {
         $user = $usuario->getUsuario(); // Obtenemos el nombre del user
         $pass = $usuario->getPassword(); // Obtenemos el password del user
 
-        $query = "SELECT * FROM rrhh_db.usuario WHERE usuario = '$user' AND password = '$pass'"; 
+        $query = "SELECT * FROM rrhh_db.usuario WHERE usuario = ? AND password = ?";
+
+        $params = array(
+            array($user, SQLSRV_PARAM_IN),
+            array($pass, SQLSRV_PARAM_IN)
+        );
 
         self::getConexion();
 
         // Preparamos y ejecutamos
-        $resultado = sqlsrv_query(self::$conexion, $query) or die( print_r( sqlsrv_errors(), true)) ;
-        if($resultado) {
-            $filas = sqlsrv_fetch_array($resultado);
-                if ($filas["usuario"] == $user && $filas["password"] == $pass) {
-                    return true;
-                }
-        } else {
-            print_r("Error en la consulta: $query");
+        $resultado = sqlsrv_query(self::$conexion, $query, $params);// or die( print_r( sqlsrv_errors(), true)) ;
+
+        if($resultado === false) {
+            die(print_r(sqlsrv_errors(), true));
             return false;
+        }
+
+        if(sqlsrv_has_rows($resultado) != 1) {
+            print_r("Usuario y password no encontrados + [$resultado]");
+            return false;
+        } else {
+            $filas = sqlsrv_fetch_array($resultado);
+            if ($filas["usuario"] == $user && $filas["password"] == $pass) {
+                return true;
+            }
         }
         return false;
     }
@@ -87,6 +99,71 @@ class UsuarioDao extends Conexion {
         $descripcion = $rol->getDescripcion();
 
         $query = "INSERT INTO rrhh_db.rol VALUES ('$nombre', '$descripcion')";
+
+        self::getConexion();
+
+        $resultado = sqlsrv_query(self::$conexion, $query) or die( print_r( sqlsrv_errors(), true));
+
+        if($resultado) {
+            return true;
+        }
+        return false;
+    }
+
+    public static function registrarDepartamento($departamento) {
+        $nombre      = $departamento->getNombreDepartamento();
+
+        $query = "INSERT INTO rrhh_db.departamento VALUES ('$nombre')";
+
+        self::getConexion();
+
+        $resultado = sqlsrv_query(self::$conexion, $query) or die( print_r( sqlsrv_errors(), true));
+
+        if($resultado) {
+            return true;
+        }
+        return false;
+    }
+
+    public static function editarDepartamento($departamento) {
+        $idDepartamento     = $departamento->getIdDepartamento();
+        $NombreDepartamento = $departamento->getNombreDepartamento();
+
+        $query = "UPDATE rrhh_db.departamento SET nombreDepartamento = ('$NombreDepartamento') WHERE idDepartamento = ('$idDepartamento')";
+
+        self::getConexion();
+
+        $resultado = sqlsrv_query(self::$conexion, $query) or die( print_r( sqlsrv_errors(), true));
+
+        if($resultado) {
+            return true;
+        }
+        return false;
+    }
+
+    public static function editarRol($rol) {
+        $idRol       = $rol->getIdRol();
+        $nombreRol   = $rol->getNombre();
+        $descripcion = $rol->getDescripcion();
+
+        $query = "UPDATE rrhh_db.rol SET nombre = ('$nombreRol'), descripcion = ('$descripcion') WHERE idRol = ('$idRol')";
+
+        self::getConexion();
+
+        $resultado = sqlsrv_query(self::$conexion, $query) or die( print_r( sqlsrv_errors(), true));
+
+        if($resultado) {
+            return true;
+        }
+        return false;
+    }
+
+    public static function editarUsuario($usuario) {
+        $idUsuario       = $usuario->getIdUsuario();
+        $nombreUsuario   = $usuario->getUsuario();
+        $estado          = $usuario->getEstado();
+
+        $query = "UPDATE rrhh_db.usuario SET usuario = ('$nombreUsuario'), estado = ('$estado') WHERE idUsuario = ('$idUsuario')";
 
         self::getConexion();
 

@@ -1,44 +1,85 @@
 html,
 body {
-  height: 100%;
+    height: 100%;
+    color: #566787;
+    background: #f5f5f5;
+    font-family: 'Varela Round', sans-serif;
+    font-size: 13px;
+}
+.listado {
+    max-height: 100%;
 }
 
 body {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-align: center;
-  align-items: center;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  background-color: #f5f5f5;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-top: 54px;
+    padding-bottom: 40px;
+    background-color: #f5f5f5;
 }
 
 .form-signin {
-  width: 100%;
-  max-width: 330px;
-  padding: 15px;
-  margin: auto;
+    width: 80%;
+    max-width: 430px;
+    /*padding: 15px;*/
+    margin: auto;
 }
-.form-signin .checkbox {
-  font-weight: 400;
-}
+
+/* Propiedades del modal login */
 .form-signin .form-control {
-  position: relative;
-  box-sizing: border-box;
-  height: auto;
-  padding: 10px;
-  font-size: 16px;
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 14px;
 }
 .form-signin .form-control:focus {
-  z-index: 2;
+    z-index: 1;
 }
 .form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
 }
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+
+table.table td:last-child i {
+    opacity: 0.9;
+    font-size: 22px;    /* Tamaño de los iconos de acción */
+    cursor: pointer;
 }
+table.table td a {
+    font-weight: bold;
+    color: #566787;
+    display: inline-block;
+    text-decoration: none;
+    outline: none !important;
+}
+table.table td a:hover {
+    color: #2196F3;
+}
+
+
+table.table td a.edit {
+    color: #FFC107;
+}
+table.table td a.delete_forever {
+    color: #F44336;
+}
+table.table td i {
+    font-size: 19px;
+}
+
+
+/*
+.modal .modal-header, .modal .modal-body, .modal .modal-footer {
+    padding: 20px 30px;
+}
+
+.modal .modal-footer {
+    background: #ecf0f1;
+    border-radius: 0 0 3px 3px;
+}
+*/
+

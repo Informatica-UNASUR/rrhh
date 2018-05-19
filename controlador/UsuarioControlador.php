@@ -25,10 +25,40 @@ class UsuarioControlador {
         return UsuarioDao::registrar($obj_usuario);
     }
 
+    public static function editarUsuario($idUsuario, $nombreUsuario, $estado) {
+        $obj_Rol = new Usuario();
+        $obj_Rol->setIdUsuario($idUsuario);
+        $obj_Rol->setUsuario($nombreUsuario);
+        $obj_Rol->setEstado($estado);
+        return UsuarioDao::editarUsuario($obj_Rol);
+    }
+
     public static function registrarRol($nombreRol, $descripcion) {
         $obj_Rol = new Rol();
         $obj_Rol->setNombre($nombreRol);
         $obj_Rol->setDescripcion($descripcion);
         return UsuarioDao::registrarRol($obj_Rol);
+    }
+
+    public static function editarRol($idRol, $nombreRol, $descripcion) {
+        $obj_Rol = new Rol();
+        $obj_Rol->setIdRol($idRol);
+        $obj_Rol->setNombre($nombreRol);
+        $obj_Rol->setDescripcion($descripcion);
+        return UsuarioDao::editarRol($obj_Rol);
+    }
+
+
+    public static function registrarDepartamento($nombreDepartamento) {
+        $obj_Departamento = new Departamento();
+        $obj_Departamento->setNombreDepartamento($nombreDepartamento);
+        return UsuarioDao::registrarDepartamento($obj_Departamento);
+    }
+
+    public static function editarDepartamento($idDepartamento, $nombreDepartamento) {
+        $obj_Departamento = new Departamento();
+        $obj_Departamento->setIdDepartamento($idDepartamento);
+        $obj_Departamento->setNombreDepartamento($nombreDepartamento);
+        return UsuarioDao::editarDepartamento($obj_Departamento);
     }
 }

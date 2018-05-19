@@ -10,14 +10,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $txtDescripcion = validar_campo($_POST["txtDescripcion"]);
 
         if(UsuarioControlador::registrarRol($txtRol, $txtDescripcion)) {
-
-//            $usuario = UsuarioControlador::getUsuario($txtUsuario, $txtPassword);
-//            $_SESSION["usuario"] = array(
-//                "idUsuario" =>$usuario->getIdUsuario(),
-//                "usuario"   =>$usuario->getUsuario(),
-//                "estado"    =>$usuario->getEstado(),
-//            );
-            header("location:admin.php");
+            header("location:rol.php");
         }
     }
 } else {

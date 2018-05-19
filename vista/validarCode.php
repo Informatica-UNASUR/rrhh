@@ -15,7 +15,7 @@ header('Content-type:application/json;charset=utf-8');
 $resultado = array();
 
 if($_SERVER["REQUEST_METHOD"] == "POST") { // Validar que el metodo de envio sea POST
-    if(isset($_POST["txtUsuario"]) && isset($_POST["txtPassword"])) {
+    if(!empty($_POST["txtUsuario"]) && !empty($_POST["txtPassword"])) {
 
         $txtUsuario = validar_campo($_POST["txtUsuario"]);
         $txtPassword = validar_campo($_POST["txtPassword"]);
@@ -28,9 +28,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") { // Validar que el metodo de envio sea
 
             $_SESSION["usuario"] = array(
                       "idUsuario" => $usuario->getIdUsuario(),
-                      "usuario"   =>$usuario->getUsuario(),
-                      "fechaAlta" =>$usuario->getFechaAlta(),
-                      "estado"    =>$usuario->getEstado()
+                      "usuario"   => $usuario->getUsuario(),
+                      "fechaAlta" => $usuario->getFechaAlta(),
+                      "estado"    => $usuario->getEstado()
             );
             //print_r($_SESSION["usuario"]);
             return print(json_encode($resultado));
