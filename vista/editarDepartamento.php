@@ -13,7 +13,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 } else {
-    header("location:registro.php?error=1");
+//    header("location:index.php?error=1");
+    header("location:index.php");
 }
 
 

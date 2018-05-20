@@ -5,7 +5,7 @@ include ('../datos/Conexion.php');
 if (isset($_SESSION["usuario"])) {
 
 } else {
-    header("location:login.php");
+    header("location:index.php");
 }
 ?>
 <?php include 'partials/menu.php'; ?>

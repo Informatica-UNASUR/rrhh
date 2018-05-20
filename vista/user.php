@@ -7,7 +7,7 @@ if (isset($_SESSION["usuario"])) {
         header("location:index.php");
     }
 } else {
-    header("location:login.php");
+    header("location:index.php");
 }
 ?>
 <?php include 'partials/menu.php'; ?>
@@ -35,7 +35,7 @@ if (isset($_SESSION["usuario"])) {
                         <tbody>
                         <?php
                         $c = new Conexion();
-                        $c = $c->conectar();
+                        $c = $c::conectar();
 
                         $q = "SELECT * FROM rrhh_db.usuario";
                         $r = sqlsrv_query($c, $q) or die( print_r( sqlsrv_errors(), true));

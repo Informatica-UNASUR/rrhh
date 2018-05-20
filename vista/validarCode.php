@@ -38,6 +38,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") { // Validar que el metodo de envio sea
         // Si no existe
         //print_r ("\nNO entro en el if\n");
     }
+} else {
+    header("location:index.php");
 }
 
 $resultado = array("valor" => "false");

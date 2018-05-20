@@ -3,10 +3,10 @@
 
 if (isset($_SESSION["usuario"])) {
     if($_SESSION["usuario"]["estado"] == 0) {
-        header("location:index.php");
+        header("location:usuario.php");
     }
 } else {
-    header("location:login.php");
+    header("location:index.php");
 }
 ?>
 <?php include 'partials/menu.php'; ?>

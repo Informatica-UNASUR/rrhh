@@ -20,18 +20,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
          $txtEstado = validar_campo($_POST["txtEstado"]);
 
         if(UsuarioControlador::registrar($txtUsuario, $txtPassword, $txtEstado)) {
-
-//            $usuario = UsuarioControlador::getUsuario($txtUsuario, $txtPassword);
-//            $_SESSION["usuario"] = array(
-//                "idUsuario" =>$usuario->getIdUsuario(),
-//                "usuario"   =>$usuario->getUsuario(),
-//                "estado"    =>$usuario->getEstado(),
-//            );
             header("location:user.php");
         }
     }
 } else {
-    header("location:registro.php?error=1");
+    header("location:index.php");
 }
 
 
