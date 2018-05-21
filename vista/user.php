@@ -1,6 +1,6 @@
 <?php include 'partials/head.php'; ?>
 <?php
-include ('../datos/Conexion.php');
+include '../controlador/UsuarioControlador.php';
 
 if (isset($_SESSION["usuario"])) {
     if($_SESSION["usuario"]["estado"] == 0) { // Si el estado del user es 1, muestra todo lo de abajo
@@ -34,19 +34,14 @@ if (isset($_SESSION["usuario"])) {
                         </thead>
                         <tbody>
                         <?php
-                        $c = new Conexion();
-                        $c = $c::conectar();
-
-                        $q = "SELECT * FROM rrhh_db.usuario";
-                        $r = sqlsrv_query($c, $q) or die( print_r( sqlsrv_errors(), true));
+                        $r = UsuarioControlador::mostrarUsuarios();
 
                         while ($row = sqlsrv_fetch_array($r) ) {
-                            $activo = false;
                             $idUsuario = $row['idUsuario'];
                             $nombre = $row['usuario'];
                             $fechaAlta = $row['fechaAlta'];
                             $estado = $row['estado'];
-                            if ($estado == 1) $activo = true;
+                            $estado == 1 ? $activo = true : $activo = false;
                             ?>
                             <tr>
                                 <td>&nbsp;&nbsp;<?php echo $idUsuario; ?></td>
@@ -65,7 +60,9 @@ if (isset($_SESSION["usuario"])) {
                                        data-estado="<?php echo $estado ?>">
                                         <i class="material-icons" data-toggle="tooltip" title="Editar" style="color: #FFC107;">edit</i>
                                     </a>
-                                    <a href="#">
+                                    <a href="#" data-toggle="modal" data-target="#eliminarUsuarioModal"
+                                       data-id="<?php echo $idUsuario ?>"
+                                       data-name="<?php echo $nombre ?>">
                                         <i class="material-icons" data-toggle="tooltip" title="Eliminar" style="color: #F44336;">delete</i>
                                     </a>
 
@@ -78,6 +75,7 @@ if (isset($_SESSION["usuario"])) {
             </div>
         </div>
     </div>
+    <?php include 'modal/eliminarUsuario.php'?>
 </div>
 
 <?php include 'modal/agregarUsuario.php'?>

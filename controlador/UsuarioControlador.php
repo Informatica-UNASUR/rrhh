@@ -61,4 +61,13 @@ class UsuarioControlador {
         $obj_Departamento->setNombreDepartamento($nombreDepartamento);
         return UsuarioDao::editarDepartamento($obj_Departamento);
     }
+
+    // Mostrar usuarios
+    public static function mostrarUsuarios() {
+        return UsuarioDao::mostrarUsuarios();
+    }
+
+    public static function eliminarUsuario($idUsuario) {
+        return UsuarioDao::eliminarUsuario($idUsuario);
+    }
 }

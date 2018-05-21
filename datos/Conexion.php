@@ -5,7 +5,7 @@ class Conexion {
         // Evaluamos la conexion
         try {
             // Variable de conexion
-            $cn = sqlsrv_connect("ROOT", array('Database'=>"rrhh_db_dev", 'UID'=>"sa", 'PWD'=>"j053", 'CharacterSet'=>'UTF-8', 'ReturnDatesAsStrings'=>true));
+            $cn = sqlsrv_connect("SERGIOHP\SQLEXPRESS", array('Database'=>"rrhh_db_dev", 'CharacterSet'=>'UTF-8', 'ReturnDatesAsStrings'=>true));
             /*if($cn)
                 echo "Conexion ok";
             else

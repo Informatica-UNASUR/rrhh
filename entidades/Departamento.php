@@ -15,7 +15,7 @@ Class Departamento {
     /**
      * @param mixed $idDepartamento
      */
-    public function setIdDepartamento($idDepartamento): void
+    public function setIdDepartamento($idDepartamento)
     {
         $this->idDepartamento = $idDepartamento;
     }
@@ -31,7 +31,7 @@ Class Departamento {
     /**
      * @param mixed $nombreDepartamento
      */
-    public function setNombreDepartamento($nombreDepartamento): void
+    public function setNombreDepartamento($nombreDepartamento)
     {
         $this->nombreDepartamento = $nombreDepartamento;
     }

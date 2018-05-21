@@ -10,7 +10,7 @@
 								'query':query,
 								'per_page':per_page
 							};
-			$("#loader").fadeIn('slow');
+			/*$("#loader").fadeIn('slow');
 			$.ajax({
 				url:'ajax/listarEmpleados.php',
 				data: parametros,
@@ -21,52 +21,62 @@
 					$(".outer_div").html(data).fadeIn('slow');
 					$("#loader").html("");
 				}
-			})
+			})*/
 		}
 		$('#editarDepartamentoModal').on('show.bs.modal', function (event) {
-		  var button = $(event.relatedTarget) // Button that triggered the modal
+		  var button = $(event.relatedTarget); // Button that triggered the modal
 
-		  var nombreDepartamento = button.data('name')
-		  $('#edit_name').val(nombreDepartamento)
+		  var nombreDepartamento = button.data('name');
+		  $('#edit_name').val(nombreDepartamento);
             //alert(nombreDepartamento);
 
-          var id = button.data('id') 		 
+          var id = button.data('id');
 		  $('#edit_id').val(id)
 		  //alert('El ID es: '+id);
-		})
+		});
 
 		$('#editarRolModal').on('show.bs.modal', function (event) {
-		  var button = $(event.relatedTarget) // Button that triggered the modal
+		  var button = $(event.relatedTarget); // Button that triggered the modal
 
-		  var nombreRol = button.data('name')
-		  $('#edit_name').val(nombreRol)
+		  var nombreRol = button.data('name');
+		  $('#edit_name').val(nombreRol);
             //alert(nombreDepartamento);
 
-          var descripcion = button.data('desc')
-          $('#edit_desc').val(descripcion)
+          var descripcion = button.data('desc');
+          $('#edit_desc').val(descripcion);
 
-          var id = button.data('id')
+          var id = button.data('id');
 		  $('#edit_id').val(id)
 		  //alert('El ID es: '+id);
-		})
+		});
 
 		$('#editarUsuarioModal').on('show.bs.modal', function (event) {
-		  var button = $(event.relatedTarget) // Button that triggered the modal
+		  var button = $(event.relatedTarget); // Button that triggered the modal
 
-		  var nombreUsuario = button.data('name')
-		  $('#edit_name').val(nombreUsuario)
+		  var nombreUsuario = button.data('name');
+		  $('#edit_name').val(nombreUsuario);
             //alert(nombreDepartamento);
 
-          var fecha = button.data('fecha')
-          $('#edit_fecha').val(fecha)
+          var fecha = button.data('fecha');
+          $('#edit_fecha').val(fecha);
 
-          var estado = button.data('estado')
-          $('#edit_estado').val(estado)
+          var estado = button.data('estado');
+          $('#edit_estado').val(estado);
 
-          var id = button.data('id')
-		  $('#edit_id').val(id)
+          var id = button.data('id');
+		  $('#edit_id').val(id);
 		  //alert('El ID es: '+id);
-		})
+		});
+
+        $('#eliminarUsuarioModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+
+            var nombreUsuario = button.data('name');
+            $('#name').val(nombreUsuario);
+
+            var id = button.data('id');
+            $('#id').val(id);
+        });
 		//
 		// $('#deleteProductModal').on('show.bs.modal', function (event) {
 		//   var button = $(event.relatedTarget) // Button that triggered the modal

@@ -174,4 +174,29 @@ class UsuarioDao extends Conexion {
         }
         return false;
     }
+
+    // Metodo para mostrar usuarios
+    public static function mostrarUsuarios() {
+        $q = "SELECT * FROM rrhh_db.usuario";
+
+        self::getConexion();
+
+        $resultado = sqlsrv_query(self::$conexion, $q) or die( print_r( sqlsrv_errors(), true));
+
+        return $resultado;
+    }
+
+    // Metodo para eliminar usuario
+    public static function eliminarUsuario($idUsuario) {
+        $q = "DELETE FROM rrhh_db.usuario WHERE idUsuario = ('$idUsuario')";
+
+        self::getConexion();
+
+        $resultado = sqlsrv_query(self::$conexion, $q) or die( print_r( sqlsrv_errors(), true));
+
+        if($resultado) {
+            return true;
+        }
+        return false;
+    }
 }
