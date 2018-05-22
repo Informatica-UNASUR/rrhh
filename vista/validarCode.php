@@ -26,14 +26,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST") { // Validar que el metodo de envio sea
             //print_r("\nEntro en el if\n");
             $usuario = UsuarioControlador::getUsuario($txtUsuario, $txtPassword);
 
-            $_SESSION["usuario"] = array(
-                      "idUsuario" => $usuario->getIdUsuario(),
-                      "usuario"   => $usuario->getUsuario(),
-                      "fechaAlta" => $usuario->getFechaAlta(),
-                      "estado"    => $usuario->getEstado()
-            );
-            //print_r($_SESSION["usuario"]);
-            return print(json_encode($resultado));
+            if($usuario->getEstado()) {
+                $_SESSION["usuario"] = array(
+                    "idUsuario" => $usuario->getIdUsuario(),
+                    "usuario"   => $usuario->getUsuario(),
+                    "fechaAlta" => $usuario->getFechaAlta(),
+                    "estado"    => $usuario->getEstado()
+                );
+                //print_r($_SESSION["usuario"]);
+                return print(json_encode($resultado));
+            }
+
         }
         // Si no existe
         //print_r ("\nNO entro en el if\n");

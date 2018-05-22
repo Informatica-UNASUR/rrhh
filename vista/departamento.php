@@ -1,6 +1,6 @@
 <?php include 'partials/head.php'; ?>
 <?php
-include ('../datos/Conexion.php');
+include '../controlador/DepartamentoControlador.php';
 
 if (isset($_SESSION["usuario"])) {
 
@@ -29,11 +29,7 @@ if (isset($_SESSION["usuario"])) {
                         </thead>
                         <tbody>
                         <?php
-                        $c = new Conexion();
-                        $c = $c->conectar();
-
-                        $q = "SELECT * FROM rrhh_db.departamento";
-                        $r = sqlsrv_query($c, $q) or die( print_r( sqlsrv_errors(), true));
+                        $r = DepartamentoControlador::mostrarDepartamentos();
 
                         while ($row = sqlsrv_fetch_array($r) ) {
                             $idDepartamento = $row['idDepartamento'];
@@ -48,7 +44,9 @@ if (isset($_SESSION["usuario"])) {
                       data-name="<?php echo $nombreDepartamento;?>">
                         <i class="material-icons" data-toggle="tooltip" title="Editar" style="color: #FFC107;">edit</i>
                     </a>
-                    <a href="#">
+                    <a href="#" data-toggle="modal" data-target="#eliminarDepartamentoModal"
+                       data-id="<?php echo $idDepartamento ?>"
+                       data-name="<?php echo $nombreDepartamento ?>">
                         <i class="material-icons" data-toggle="tooltip" title="Eliminar" style="color: #F44336;">delete</i>
                     </a>                                    
                 </td>
@@ -60,8 +58,10 @@ if (isset($_SESSION["usuario"])) {
                 <?php include("modal/agregarDepartamento.php");?>
             </div>
         </div>
+        <?php include 'modal/eliminarDepartamento.php'?>
     </div>
 </div>
+
 
 <?php include("modal/editarDepartamento.php");?>
 <?php include 'partials/footer.php'; ?>

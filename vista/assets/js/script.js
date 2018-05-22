@@ -35,6 +35,16 @@
 		  //alert('El ID es: '+id);
 		});
 
+        $('#eliminarDepartamentoModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+
+            var nombreDepartamento = button.data('name');
+            $('#name').val(nombreDepartamento);
+
+            var id = button.data('id');
+            $('#id').val(id);
+        });
+
 		$('#editarRolModal').on('show.bs.modal', function (event) {
 		  var button = $(event.relatedTarget); // Button that triggered the modal
 

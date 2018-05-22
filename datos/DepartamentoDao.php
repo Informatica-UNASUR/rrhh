@@ -1,0 +1,71 @@
+<?php
+include 'Conexion.php';
+include '../entidades/Departamento.php';
+
+class DepartamentoDao extends Conexion {
+    protected static $conexion;
+
+    private static function getConexion() {
+        self::$conexion = Conexion::conectar();
+    }
+
+    private static function desconectar() {
+        self::$conexion = null;
+    }
+
+    public static function registrarDepartamento($departamento) {
+        $nombre      = $departamento->getNombreDepartamento();
+
+        $query = "INSERT INTO rrhh_db.departamento VALUES ('$nombre')";
+
+        self::getConexion();
+
+        $resultado = sqlsrv_query(self::$conexion, $query) or die( print_r( sqlsrv_errors(), true));
+
+        if($resultado) {
+            return true;
+        }
+        return false;
+    }
+
+    public static function editarDepartamento($departamento) {
+        $idDepartamento     = $departamento->getIdDepartamento();
+        $NombreDepartamento = $departamento->getNombreDepartamento();
+
+        $query = "UPDATE rrhh_db.departamento SET nombreDepartamento = ('$NombreDepartamento') WHERE idDepartamento = ('$idDepartamento')";
+
+        self::getConexion();
+
+        $resultado = sqlsrv_query(self::$conexion, $query) or die( print_r( sqlsrv_errors(), true));
+
+        if($resultado) {
+            return true;
+        }
+        return false;
+    }
+
+    // Metodo para mostrar departamentos
+    public static function mostrarDepartamentos() {
+        $q = "SELECT * FROM rrhh_db.departamento";
+
+        self::getConexion();
+
+        $resultado = sqlsrv_query(self::$conexion, $q) or die( print_r( sqlsrv_errors(), true));
+
+        return $resultado;
+    }
+
+    // Metodo para eliminar departamento
+    public static function eliminarDepartamento($idDepartamento) {
+        $q = "DELETE FROM rrhh_db.departamento WHERE idDepartamento = ('$idDepartamento')";
+
+        self::getConexion();
+
+        $resultado = sqlsrv_query(self::$conexion, $q) or die( print_r( sqlsrv_errors(), true));
+
+        if($resultado) {
+            return true;
+        }
+        return false;
+    }
+}

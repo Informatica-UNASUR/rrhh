@@ -1,5 +1,5 @@
 <?php
-include '../controlador/UsuarioControlador.php';
+include '../controlador/DepartamentoControlador.php';
 include '../helps/helps.php';
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -7,7 +7,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $txtNombreDepartamento = validar_campo($_POST["txtNombreDepartamento"]);
 
-        if(UsuarioControlador::registrarDepartamento($txtNombreDepartamento)) {
+        if(DepartamentoControlador::registrarDepartamento($txtNombreDepartamento)) {
             header("location:departamento.php");
         }
     }
