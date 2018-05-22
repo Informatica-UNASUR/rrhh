@@ -43,6 +43,39 @@ $(document).ready(function() {
        return false;
     }); // Captura el evento
 
+    $("#eliminarDepartamento").bind("submit", function(){
+        $.ajax({
+            type: $(this).attr("method"),
+            url: $(this).attr("action"),
+            data: $(this).serialize(),
+            beforeSend: function () {
+                $("#eliminarDepartamento button[type=submit]").html("Enviando...");
+                $("#eliminarDepartamento button[type=submit]").attr("disabled", "disabled");
+            },
+            success: function (response) {
+                console.log(response);
+                if (response.valor == "true") {
+                    $("body").overhang({
+                        type: "success",
+                        message: "Departamento eliminado correctamente 😃",
+                        duration: 1,
+                        callback: function () {
+                            window.location.href = "departamento.php";
+                        }
+                    });
+                } else {
+                    $("body").overhang({
+                        type: "error",
+                        message: "No eliminado!"
+                    });
+                }
+                $("#eliminarDepartamento button[type=submit]").html("Eliminar");
+                $("#eliminarDepartamento button[type=submit]").removeAttr("disabled");
+            }
+        });
+        return false;
+    });
+
     // Activa boton si no estan vacios
     $("#loginForm input").keyup(function () {
         var form = $(this).parents("#loginForm");

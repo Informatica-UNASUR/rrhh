@@ -8,7 +8,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>¿Esta seguro que desea eliminar este departamento?</label>
+                        <label>¿Está seguro que desea eliminar este departamento?</label>
                         <input type="text" name="txtNombreDepartamento" id="name" class="form-control" readonly>
                         <input type="hidden" name="txtIdDepartamento" id="id">
                     </div>

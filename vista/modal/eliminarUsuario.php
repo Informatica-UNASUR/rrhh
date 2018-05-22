@@ -8,7 +8,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>¿Esta seguro que desea eliminar este usuario?</label>
+                        <label>¿Está seguro que desea eliminar este usuario?</label>
                         <input type="text" name="txtNombreUsuario" id="name" class="form-control" readonly>
                         <input type="hidden" name="txtIdUsuario" id="id">
                     </div>
