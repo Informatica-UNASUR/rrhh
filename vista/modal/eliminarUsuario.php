@@ -12,10 +12,10 @@
                         <input type="text" name="txtNombreUsuario" id="name" class="form-control" readonly>
                         <input type="hidden" name="txtIdUsuario" id="id">
                     </div>
-                    <br>
+                    <p class="text-danger"><small>Esta acción no se puede deshacer.</small></p>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-                        <input type="submit" class="btn btn-success" value="Eliminar">
+                        <input type="submit" class="btn btn-danger" value="Eliminar">
                     </div>
             </form>
         </div>

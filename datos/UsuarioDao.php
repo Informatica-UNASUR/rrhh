@@ -110,37 +110,6 @@ class UsuarioDao extends Conexion {
         return false;
     }
 
-    public static function registrarDepartamento($departamento) {
-        $nombre      = $departamento->getNombreDepartamento();
-
-        $query = "INSERT INTO rrhh_db.departamento VALUES ('$nombre')";
-
-        self::getConexion();
-
-        $resultado = sqlsrv_query(self::$conexion, $query) or die( print_r( sqlsrv_errors(), true));
-
-        if($resultado) {
-            return true;
-        }
-        return false;
-    }
-
-    public static function editarDepartamento($departamento) {
-        $idDepartamento     = $departamento->getIdDepartamento();
-        $NombreDepartamento = $departamento->getNombreDepartamento();
-
-        $query = "UPDATE rrhh_db.departamento SET nombreDepartamento = ('$NombreDepartamento') WHERE idDepartamento = ('$idDepartamento')";
-
-        self::getConexion();
-
-        $resultado = sqlsrv_query(self::$conexion, $query) or die( print_r( sqlsrv_errors(), true));
-
-        if($resultado) {
-            return true;
-        }
-        return false;
-    }
-
     public static function editarRol($rol) {
         $idRol       = $rol->getIdRol();
         $nombreRol   = $rol->getNombre();

@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/signin.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../vendor/dataTables/css/dataTables.bootstrap4.min.css">
 
     <!-- Custom styles for this template -->
     <style>

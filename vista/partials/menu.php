@@ -22,8 +22,6 @@
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="empleado.php"><i class="fa fa-users" aria-hidden="true"></i> Empleados</a>
                             <a class="dropdown-item" href="departamento.php"><i class="fa fa-sitemap" aria-hidden="true"></i> Departamentos</a>
-                            <a class="dropdown-item" href="#">Acción #1</a>
-                            <a class="dropdown-item" href="#">Acción #2</a>
                         </div>
                     </li>
                     <li class="nav-item">
@@ -46,9 +44,6 @@
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item" href="user.php"><i class="fa fa-user"></i> Usuarios</a>
                                 <a class="dropdown-item" href="rol.php"><i class="fa fa-sitemap" aria-hidden="true"></i> Roles</a>
-                                <a class="dropdown-item" href="rol_backup.php"><i class="fa fa-sitemap" aria-hidden="true"></i> Roles Backup</a>
-                                <a class="dropdown-item" href="#"><i class="fa fa-sitemap" aria-hidden="true"></i> Privilegios</a>
-                                <a class="dropdown-item" href="#"><i class="fa fa-sitemap" aria-hidden="true"></i> Acción #3</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">

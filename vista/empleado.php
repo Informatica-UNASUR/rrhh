@@ -20,7 +20,7 @@ if (isset($_SESSION["usuario"])) {
                 </div>
 
                 <div class="card-body">
-                    <table id="example" class="table table-hover table-hover" style="width:100%">
+                    <table id="dtDefault" class="table table-sm table-hover" style="width:100%">
                         <thead>
                         <tr>
                             <th>#ID</th>
@@ -28,8 +28,8 @@ if (isset($_SESSION["usuario"])) {
                             <th>CI</th>
                             <th>Dirección</th>
                             <th>Email</th>
-                            <th>Estado</th>
-                            <th>Acción</th>
+                            <th class="text-center">Estado</th>
+                            <th class="text-center">Acción</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -58,11 +58,11 @@ if (isset($_SESSION["usuario"])) {
                                 <td><?php echo $direccion; ?></td>
                                 <td><?php echo $email; ?></td>
                                 <?php if($estado) {?>
-                                    <td><span class="badge badge-success"><?php echo "Activo"; ?></span></td>
+                                    <td class="text-center"><span class="badge badge-success"><?php echo "Activo"; ?></span></td>
                                 <?php } else {?>
-                                    <td><span class="badge badge-secondary"><?php echo "Inactivo"; ?></span></td>
+                                    <td class="text-center"><span class="badge badge-secondary"><?php echo "Inactivo"; ?></span></td>
                                 <?php }?>
-                                <td>
+                                <td class="text-center">
                                     <a href="#" data-toggle="modal" data-target="#editarUsuarioModal"
                                        data-id="<?php echo $idEmpleado ?>"
                                        data-name="<?php echo $funcionario ?>"

@@ -22,13 +22,13 @@ if (isset($_SESSION["usuario"])) {
                 </div>
 
                 <div class="card-body">
-                    <table id="example" class="table table-hover table-hover" style="width:100%">
+                    <table id="dtDefault" class="table table-sm table-hover" style="width:100%">
                         <thead>
                         <tr>
                             <th>#ID</th>
                             <th>Nombre del usuario</th>
                             <th>Fecha de alta</th>
-                            <th>Estado</th>
+                            <th class="text-center">Estado</th>
                             <th class="text-center">Acción</th>
                         </tr>
                         </thead>
@@ -48,9 +48,9 @@ if (isset($_SESSION["usuario"])) {
                                 <td><?php echo $nombre; ?></td>
                                 <td><?php echo $fechaAlta; ?></td>
                                 <?php if($estado) {?>
-                                    <td><span class="badge badge-success"><?php echo "Activo"; ?></span></td>
+                                    <td class="text-center"><span class="badge badge-success"><?php echo "Activo"; ?></span></td>
                                 <?php } else {?>
-                                    <td><span class="badge badge-secondary"><?php echo "Inactivo"; ?></span></td>
+                                    <td class="text-center"><span class="badge badge-secondary"><?php echo "Inactivo"; ?></span></td>
                                 <?php }?>
                                 <td class="text-center">
                                     <a href="#" data-toggle="modal" data-target="#editarUsuarioModal"

@@ -12,19 +12,19 @@ if (isset($_SESSION["usuario"])) {
 
 <div class="container listado">
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-7">
             <div class="card">
                 <div class="card-header">
                     LISTADO DE DEPARTAMENTOS
                     <a href="#agregarDepartamentoModal" class="btn btn-sm btn-outline-dark float-right" data-toggle="modal">Agregar departamento</a>
                 </div>
                 <div class="card-body">
-                    <table id="example" class="table table-hover table-hover" style="width:100%">
+                    <table id="dtDepartamento" class="table table-sm table-hover" style="width:100%">
                         <thead>
                         <tr>
                             <th>#ID</th>
                             <th>Nombre del departamento</th>
-                            <th>Acción</th>
+                            <th class="text-center">Acción</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -38,7 +38,7 @@ if (isset($_SESSION["usuario"])) {
                 <tr>            
                      <td><?php echo $idDepartamento;?></td>
                      <td><?php echo $nombreDepartamento; ?></td>
-               <td>                                    
+               <td class="text-center">
                     <a href="#" data-toggle="modal" data-target="#editarDepartamentoModal" 
                       data-id="<?php echo $idDepartamento; ?>"
                       data-name="<?php echo $nombreDepartamento;?>">

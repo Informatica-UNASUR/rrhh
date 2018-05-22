@@ -1,5 +1,5 @@
 <?php
-include '../controlador/UsuarioControlador.php';
+include '../controlador/DepartamentoControlador.php';
 include '../helps/helps.php';
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -8,7 +8,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $txtNombreDepartamento = validar_campo($_POST["txtNombreDepartamento"]);
         $txtIdDepartamento = $_POST["txtIdDepartamento"];
 
-        if(UsuarioControlador::editarDepartamento($txtIdDepartamento, $txtNombreDepartamento)) { // Resulota
+        if(DepartamentoControlador::editarDepartamento($txtIdDepartamento, $txtNombreDepartamento)) { // Resulota
             header("location:departamento.php");
         }
     }
