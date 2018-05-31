@@ -21,10 +21,14 @@ $(document).ready(function() {
                             window.location.href = "admin.php";
                         }
                     });
-                } else {
+                } else if (response.valor == "inactivo") {
                     $("body").overhang({
-                        type: "error",
-                        message: "Usuario o password incorrectos!"
+                        type: "warn",
+                        message: "Usuario inactivo, contactar a soporte@rrhh.com",
+                        duration: 2,
+                        overlay: true
+                        // closeConfirm: true
+                        // upper: true
                     });
                 }
                 $("#loginForm button[type=submit]").html("Ingresar");
@@ -34,6 +38,7 @@ $(document).ready(function() {
                 $("body").overhang({
                     type: "error",
                     message: "Usuario o password incorrectos!",
+                    overlay: true
                 });
                 $("#loginForm button[type=submit]").html("Ingresar");
                 $("#loginForm button[type=submit]").removeAttr("disabled");
@@ -57,7 +62,7 @@ $(document).ready(function() {
                 if (response.valor == "true") {
                     $("body").overhang({
                         type: "success",
-                        message: "Departamento eliminado correctamente 😃",
+                        message: "Departamento eliminado correctamente 🙂",
                         duration: 1,
                         callback: function () {
                             window.location.href = "departamento.php";
@@ -101,6 +106,18 @@ $(document).ready(function() {
         }
     });
 
+    $("#nuevoUsuario input").keyup(function () {
+        var form = $(this).parents("#nuevoUsuario");
+        var check = checkCampos(form);
+        console.log(check);
+        if(check) {
+            $("#agregar").prop("disabled", false);
+        } else {
+            // $("#agregar").
+            $("#agregar").prop("disabled", true);
+        }
+    });
+
     $.extend($.fn.dataTable.defaults, {
         language: {
             "sProcessing":     "Procesando...",
@@ -129,13 +146,18 @@ $(document).ready(function() {
     });
 
     $('#dtDefault').DataTable({
-
+        // "order": [[ 3, "asc" ]] Ordena por la columna 3
     });
 
     $('#dtDepartamento').DataTable({
         // pagingType: "first_last_numbers",
         pageLength: 9,
-        lengthMenu: [ 9, 15, 25, 100 ]
+        lengthMenu: [ 9, 15, 25, 100 ],
+        // sDom: "<'row'<'col-sm-6'l><'col-sm-6'f>>" +
+        sDom: "<'row'<'col-sm-12'f>>" +
+              "<'row'<'col-sm-12'tr>>" +
+              "<'row'<'col-sm-6'l><'col-sm-6'p>><'row'<'col-sm-12'i>>"
+        // "<'col-sm-12'p<br/>><'row'<'col-sm-12'i>>"
     });
 
     $('#dtRol').DataTable({
@@ -143,6 +165,16 @@ $(document).ready(function() {
         paging: false
         // info: false
     });
+
+    $.ajax({
+        type: "POST",
+        url: "getRoles.php",
+        success: function (response) {
+            $('.selecciona-rol select').html(response).fadeIn();
+        }
+    });
+
+
 });
 
 function checkCampos(obj) {

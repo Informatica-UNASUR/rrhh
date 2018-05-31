@@ -69,6 +69,7 @@ class UsuarioDao extends Conexion {
             $usuario->setUsuario($filas["usuario"]);
             $usuario->setFechaAlta($filas["fechaAlta"]);
             $usuario->setEstado($filas["estado"]);
+            $usuario->setIdRol($filas["Rol_idRol"]);
 
             return $usuario;
         } else {
@@ -78,15 +79,21 @@ class UsuarioDao extends Conexion {
     }
 
     public static function registrar($usuario) {
+//        date_default_timezone_set("America/Asuncion");
         $user   = $usuario->getUsuario();
         $pass   = $usuario->getPassword();
         $estado = $usuario->getEstado();
-        $fechaAlta = date("d")."-".date("m")."-".date("Y");
-        $query = "INSERT INTO rrhh_db.usuario VALUES ('$user', '$pass','$fechaAlta', '$estado')";
+        $idRol = $usuario->getIdRol();
+        $query = "{call sp_registrar_usuario(?,?,?,?)}";
+        $params = array(array($user, SQLSRV_PARAM_IN),
+                        array($pass, SQLSRV_PARAM_IN),
+                        array($estado, SQLSRV_PARAM_IN),
+                        array($idRol, SQLSRV_PARAM_IN)
+        );
 
         self::getConexion();
 
-        $resultado = sqlsrv_query(self::$conexion, $query) or die( print_r( sqlsrv_errors(), true)) ;
+        $resultado = sqlsrv_query(self::$conexion, $query, $params) or die( print_r( sqlsrv_errors(), true)) ;
 
         if($resultado) {
             return true;
@@ -131,12 +138,20 @@ class UsuarioDao extends Conexion {
         $idUsuario       = $usuario->getIdUsuario();
         $nombreUsuario   = $usuario->getUsuario();
         $estado          = $usuario->getEstado();
+        $idRol           = $usuario->getIdRol();
 
-        $query = "UPDATE rrhh_db.usuario SET usuario = ('$nombreUsuario'), estado = ('$estado') WHERE idUsuario = ('$idUsuario')";
+//        $query = "UPDATE rrhh_db.usuario SET usuario = ('$nombreUsuario'), estado = ('$estado') WHERE idUsuario = ('$idUsuario')";
+
+        $query = "{call sp_actualizar_usuario(?,?,?,?)}";
+        $params = array(array($idUsuario, SQLSRV_PARAM_IN),
+            array($nombreUsuario, SQLSRV_PARAM_IN),
+            array($estado, SQLSRV_PARAM_IN),
+            array($idRol, SQLSRV_PARAM_IN)
+        );
 
         self::getConexion();
 
-        $resultado = sqlsrv_query(self::$conexion, $query) or die( print_r( sqlsrv_errors(), true));
+        $resultado = sqlsrv_query(self::$conexion, $query, $params) or die( print_r( sqlsrv_errors(), true));
 
         if($resultado) {
             return true;
@@ -146,7 +161,22 @@ class UsuarioDao extends Conexion {
 
     // Metodo para mostrar usuarios
     public static function mostrarUsuarios() {
-        $q = "SELECT * FROM rrhh_db.usuario";
+        $q = "SELECT * FROM rrhh_db.usuario u 
+              INNER JOIN rrhh_db.usuariorol ur 
+              ON u.idUsuario=ur.Usuario_idUsuario
+              INNER JOIN rrhh_db.rol r
+              ON ur.Rol_idRol=r.idRol";
+
+        self::getConexion();
+
+        $resultado = sqlsrv_query(self::$conexion, $q) or die( print_r( sqlsrv_errors(), true));
+
+        return $resultado;
+    }
+
+    // Metodo para mostrar roles
+    public static function mostrarRoles() {
+        $q = "SELECT * FROM rrhh_db.rol";
 
         self::getConexion();
 

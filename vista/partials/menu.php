@@ -22,6 +22,7 @@
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="empleado.php"><i class="fa fa-users" aria-hidden="true"></i> Empleados</a>
                             <a class="dropdown-item" href="departamento.php"><i class="fa fa-sitemap" aria-hidden="true"></i> Departamentos</a>
+                            <a class="dropdown-item" href="cargo.php"><i class="fa fa-briefcase" aria-hidden="true"></i> Cargos</a>
                         </div>
                     </li>
                     <li class="nav-item">
@@ -33,7 +34,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Reportes</a>
                     </li>
-                    <?php if($_SESSION["usuario"]["estado"] == 1) { ?> <!-- Si el user es admin -->
+                    <?php if($_SESSION["usuario"]["Rol_idRol"] == 1) { ?> <!-- Si el user es admin -->
                         <li class="nav-item">
                             <a class="nav-link" href="#">Auditoria</a>
                         </li>

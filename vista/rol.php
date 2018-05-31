@@ -1,9 +1,9 @@
 <?php include 'partials/head.php'; ?>
 <?php
-include ('../datos/Conexion.php');
+include '../controlador/UsuarioControlador.php';
 
 if (isset($_SESSION["usuario"])) {
-    if($_SESSION["usuario"]["estado"] == 0) { // Si el estado del user es 1, muestra todo lo de abajo
+    if($_SESSION["usuario"]["Rol_idRol"] == 2) { // Si el rol del user es 2, redirige al index
         header("location:index.php");
     }
 } else {
@@ -33,11 +33,7 @@ if (isset($_SESSION["usuario"])) {
                         </thead>
                         <tbody>
                         <?php
-                        $c = new Conexion();
-                        $c = $c->conectar();
-
-                        $q = "SELECT * FROM rrhh_db.rol";
-                        $r = sqlsrv_query($c, $q) or die( print_r( sqlsrv_errors(), true));
+                        $r = UsuarioControlador::mostrarRoles();
 
                         while ($row = sqlsrv_fetch_array($r) ) {
                             $idRol = $row['idRol'];

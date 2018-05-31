@@ -2,7 +2,7 @@
 <?php
 
 if (isset($_SESSION["usuario"])) {
-    if($_SESSION["usuario"]["estado"] == 0) {
+    if($_SESSION["usuario"]["Rol_idRol"] == 2) {
         header("location:usuario.php");
     }
 } else {
@@ -27,6 +27,4 @@ if (isset($_SESSION["usuario"])) {
     </div>
 </div>
 
-<?php include 'modal/agregarUsuario.php'?>
-<?php include 'modal/agregarRol.php'?>
 <?php include 'partials/footer.php'; ?>

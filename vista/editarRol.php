@@ -10,7 +10,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $txtDescripcion = $_POST["txtDescripcion"];
 
         if(UsuarioControlador::editarRol($idRol, $txtNombreRol, $txtDescripcion)) { // True/False
-            header("location:rol_backup.php");
+            header("location:rol.php");
         }
     }
 } else {

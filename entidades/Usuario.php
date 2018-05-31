@@ -5,6 +5,23 @@ Class Usuario {
     private $password;
     private $fechaAlta;
     private $estado;
+    private $idRol;
+
+    /**
+     * @return mixed
+     */
+    public function getIdRol()
+    {
+        return $this->idRol;
+    }
+
+    /**
+     * @param mixed $idRol
+     */
+    public function setIdRol($idRol): void
+    {
+        $this->idRol = $idRol;
+    }
 
     /**
      * @return mixed

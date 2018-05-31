@@ -13,13 +13,15 @@ include '../helps/helps.php';
 if($_SERVER["REQUEST_METHOD"] == "POST") {
      if(isset($_POST["txtUsuario"]) &&
         isset($_POST["txtPassword"]) &&
-        isset($_POST["txtEstado"])) {
+        isset($_POST["txtEstado"]) &&
+        isset($_POST["txtRol"])){
 
          $txtUsuario = validar_campo($_POST["txtUsuario"]);
          $txtPassword = validar_campo($_POST["txtPassword"]);
          $txtEstado = validar_campo($_POST["txtEstado"]);
+         $idRol = $_POST["txtRol"];
 
-        if(UsuarioControlador::registrar($txtUsuario, $txtPassword, $txtEstado)) {
+        if(UsuarioControlador::registrar($txtUsuario, $txtPassword, $txtEstado, $idRol)) {
             header("location:user.php");
         }
     }

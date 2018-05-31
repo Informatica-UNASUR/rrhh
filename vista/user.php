@@ -3,7 +3,7 @@
 include '../controlador/UsuarioControlador.php';
 
 if (isset($_SESSION["usuario"])) {
-    if($_SESSION["usuario"]["estado"] == 0) { // Si el estado del user es 1, muestra todo lo de abajo
+    if($_SESSION["usuario"]["Rol_idRol"] == 2) { // Si el rol del user es 2(rol usuario), redirige al index
         header("location:index.php");
     }
 } else {
@@ -14,7 +14,7 @@ if (isset($_SESSION["usuario"])) {
 
 <div class="container listado">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     LISTADO DE USUARIOS
@@ -28,6 +28,7 @@ if (isset($_SESSION["usuario"])) {
                             <th>#ID</th>
                             <th>Nombre del usuario</th>
                             <th>Fecha de alta</th>
+                            <th>Rol</th>
                             <th class="text-center">Estado</th>
                             <th class="text-center">Acción</th>
                         </tr>
@@ -38,15 +39,18 @@ if (isset($_SESSION["usuario"])) {
 
                         while ($row = sqlsrv_fetch_array($r) ) {
                             $idUsuario = $row['idUsuario'];
-                            $nombre = $row['usuario'];
+                            $nombre    = $row['usuario'];
                             $fechaAlta = $row['fechaAlta'];
-                            $estado = $row['estado'];
+                            $estado    = $row['estado'];
+                            $rol       = $row['Rol_idRol'];
+                            $nombreRol = $row['nombre'];
                             $estado == 1 ? $activo = true : $activo = false;
                             ?>
                             <tr>
                                 <td>&nbsp;&nbsp;<?php echo $idUsuario; ?></td>
                                 <td><?php echo $nombre; ?></td>
                                 <td><?php echo $fechaAlta; ?></td>
+                                <td><?php echo $nombreRol; ?></td>
                                 <?php if($estado) {?>
                                     <td class="text-center"><span class="badge badge-success"><?php echo "Activo"; ?></span></td>
                                 <?php } else {?>
@@ -57,6 +61,7 @@ if (isset($_SESSION["usuario"])) {
                                        data-id="<?php echo $idUsuario ?>"
                                        data-name="<?php echo $nombre ?>"
                                        data-fecha="<?php echo $fechaAlta ?>"
+                                       data-rol="<?php echo $rol ?>"
                                        data-estado="<?php echo $estado ?>">
                                         <i class="material-icons" data-toggle="tooltip" title="Editar" style="color: #FFC107;">edit</i>
                                     </a>

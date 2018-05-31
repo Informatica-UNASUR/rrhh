@@ -1,28 +1,3 @@
-		$(function() {
-			load(1);
-		});
-		function load(page){
-			var query=$("#q").val();
-			var per_page=10;
-			var parametros = {
-								"action":"ajax",
-								"page":page,
-								'query':query,
-								'per_page':per_page
-							};
-			/*$("#loader").fadeIn('slow');
-			$.ajax({
-				url:'ajax/listarEmpleados.php',
-				data: parametros,
-				 beforeSend: function(objeto){
-				$("#loader").html("Cargando...");
-			  },
-				success:function(data){
-					$(".outer_div").html(data).fadeIn('slow');
-					$("#loader").html("");
-				}
-			})*/
-		}
 		$('#editarDepartamentoModal').on('show.bs.modal', function (event) {
 		  var button = $(event.relatedTarget); // Button that triggered the modal
 
@@ -73,9 +48,12 @@
           var estado = button.data('estado');
           $('#edit_estado').val(estado);
 
+          var rol = button.data('rol');
+          $('#edit_rol').val(rol);
+
           var id = button.data('id');
 		  $('#edit_id').val(id);
-		  //alert('El ID es: '+id);
+		  //alert('El rol es: '+rol);
 		});
 
         $('#eliminarUsuarioModal').on('show.bs.modal', function (event) {
@@ -87,7 +65,31 @@
             var id = button.data('id');
             $('#id').val(id);
         });
-		//
+
+        $('#editarCargoModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+
+            var nombreCargo = button.data('name');
+            $('#edit_name').val(nombreCargo);
+            //alert(nombreCargo);
+
+            var id = button.data('id');
+            $('#edit_id').val(id)
+            //alert('El ID es: '+id);
+        });
+
+        $('#eliminarCargoModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+
+            var nombreCargo = button.data('name');
+            $('#name').val(nombreCargo);
+
+            var id = button.data('id');
+            $('#id').val(id);
+        });
+
+
+        //
 		// $('#deleteProductModal').on('show.bs.modal', function (event) {
 		//   var button = $(event.relatedTarget) // Button that triggered the modal
 		//   var id = button.data('id')
@@ -111,3 +113,18 @@
 			});
 		  event.preventDefault();
 		});
+
+
+        $('#nuevoUsuario').validate({
+            rules: {
+                txtUsuario: 'required',
+                txtPassword: 'required',
+                txtRol: 'required'
+            },
+
+            messages: {
+                'txtUsuario': '<span class="text-danger">Falta completar el nombre del usuario \n<span>',
+                'txtPassword': '<span class="text-danger">Falta completar la contrasena del usuario \n<span>',
+                'txtRol': '<span class="text-danger">Falta completar el rol para el usuario \n<span>'
+            }
+        });//end validate

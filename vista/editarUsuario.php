@@ -8,8 +8,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $idUsuario = $_POST["txtIdUsuario"];
         $txtNombreUsuario = validar_campo($_POST["txtNombreUsuario"]);
         $txtEstado = $_POST["txtEstado"];
+        $idRol = $_POST["txtRol"];
 
-        if(UsuarioControlador::editarUsuario($idUsuario, $txtNombreUsuario, $txtEstado)) { // True/False
+        if(UsuarioControlador::editarUsuario($idUsuario, $txtNombreUsuario, $txtEstado, $idRol)) { // True/False
             header("location:user.php");
         }
     }

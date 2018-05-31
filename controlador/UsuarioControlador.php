@@ -17,19 +17,21 @@ class UsuarioControlador {
         return UsuarioDao::getUsuario($obj_usuario);
     }
 
-    public static function registrar($usuario, $password, $estado) {
+    public static function registrar($usuario, $password, $estado, $idRol) {
         $obj_usuario = new Usuario();
         $obj_usuario->setUsuario($usuario);
         $obj_usuario->setPassword($password);
         $obj_usuario->setEstado($estado);
+        $obj_usuario->setIdRol($idRol);
         return UsuarioDao::registrar($obj_usuario);
     }
 
-    public static function editarUsuario($idUsuario, $nombreUsuario, $estado) {
+    public static function editarUsuario($idUsuario, $nombreUsuario, $estado, $idRol) {
         $obj_Rol = new Usuario();
         $obj_Rol->setIdUsuario($idUsuario);
         $obj_Rol->setUsuario($nombreUsuario);
         $obj_Rol->setEstado($estado);
+        $obj_Rol->setIdRol($idRol);
         return UsuarioDao::editarUsuario($obj_Rol);
     }
 
@@ -65,6 +67,11 @@ class UsuarioControlador {
     // Mostrar usuarios
     public static function mostrarUsuarios() {
         return UsuarioDao::mostrarUsuarios();
+    }
+
+    // Mostrar roles
+    public static function mostrarRoles() {
+        return UsuarioDao::mostrarRoles();
     }
 
     public static function eliminarUsuario($idUsuario) {

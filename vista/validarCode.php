@@ -31,12 +31,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST") { // Validar que el metodo de envio sea
                     "idUsuario" => $usuario->getIdUsuario(),
                     "usuario"   => $usuario->getUsuario(),
                     "fechaAlta" => $usuario->getFechaAlta(),
-                    "estado"    => $usuario->getEstado()
+                    "estado"    => $usuario->getEstado(),
+                    "Rol_idRol" => $usuario->getIdRol()
                 );
                 //print_r($_SESSION["usuario"]);
                 return print(json_encode($resultado));
             }
-
+            $resultado = array("valor" => "inactivo");
+            return print(json_encode($resultado));
         }
         // Si no existe
         //print_r ("\nNO entro en el if\n");
