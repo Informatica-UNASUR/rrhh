@@ -20,7 +20,7 @@ class UsuarioDao extends Conexion {
         $user = $usuario->getUsuario(); // Obtenemos el nombre del user
         $pass = $usuario->getPassword(); // Obtenemos el password del user
 
-        $query = "SELECT * FROM rrhh_db.usuario WHERE usuario = ? AND password = ?";
+        $query = "SELECT * FROM rrhh_db.usuario WHERE usuario = ?";
 
         $params = array(
             array($user, SQLSRV_PARAM_IN),
@@ -42,7 +42,7 @@ class UsuarioDao extends Conexion {
             return false;
         } else {
             $filas = sqlsrv_fetch_array($resultado);
-            if ($filas["usuario"] == $user && $filas["password"] == $pass) {
+            if ($filas["usuario"] == $user && password_verify($pass, $filas["password"])) {
                 return true;
             }
         }
@@ -54,26 +54,36 @@ class UsuarioDao extends Conexion {
         $user = $usuario->getUsuario(); // Obtenemos el nombre del user
         $pass = $usuario->getPassword(); // Obtenemos el password del user
 
-        $query = "{call login_usuario(?,?)}";
+        $query = "{call login_usuario(?)}";
         $params = array(
-            array($user, SQLSRV_PARAM_IN),
-            array($pass, SQLSRV_PARAM_IN)
+            array($user, SQLSRV_PARAM_IN)
         );
         self::getConexion();
-        $resultado = sqlsrv_query(self::$conexion, $query, $params) or die( print_r( sqlsrv_errors(), true)) ;
+        $resultado = sqlsrv_query(self::$conexion, $query, $params) or die(print_r(sqlsrv_errors(), true));
 
-        if($resultado) {
-            $filas = sqlsrv_fetch_array($resultado);
-            $usuario = new Usuario();
-            $usuario->setIdUsuario($filas["idUsuario"]);
-            $usuario->setUsuario($filas["usuario"]);
-            $usuario->setFechaAlta($filas["fechaAlta"]);
-            $usuario->setEstado($filas["estado"]);
-            $usuario->setIdRol($filas["Rol_idRol"]);
+        if($resultado === false) {
+            die(print_r(sqlsrv_errors(), true));
+            return false;
+        }
 
-            return $usuario;
+        if (sqlsrv_has_rows($resultado) != 1) {
+            print_r("Usuario y password no encontrados");
+            return false;
         } else {
-            print_r("Error en la consulta: $query");
+            $filas = sqlsrv_fetch_array($resultado);
+            if ($filas["usuario"] == $user && password_verify($pass, $filas["password"])) {
+                $usuario = new Usuario();
+                $usuario->setIdUsuario($filas["idUsuario"]);
+                $usuario->setUsuario($filas["usuario"]);
+                $usuario->setFechaAlta($filas["fechaAlta"]);
+                $usuario->setEstado($filas["estado"]);
+                $usuario->setIdRol($filas["Rol_idRol"]);
+
+                return $usuario;
+            } else {
+                print_r("Error en la consulta: $query");
+                return false;
+            }
             return false;
         }
     }

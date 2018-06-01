@@ -20,8 +20,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
          $txtPassword = validar_campo($_POST["txtPassword"]);
          $txtEstado = validar_campo($_POST["txtEstado"]);
          $idRol = $_POST["txtRol"];
+         $passwordCifrado = password_hash($txtPassword, PASSWORD_DEFAULT);
 
-        if(UsuarioControlador::registrar($txtUsuario, $txtPassword, $txtEstado, $idRol)) {
+        if(UsuarioControlador::registrar($txtUsuario, $passwordCifrado, $txtEstado, $idRol)) {
             header("location:user.php");
         }
     }

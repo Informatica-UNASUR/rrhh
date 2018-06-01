@@ -41,7 +41,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") { // Validar que el metodo de envio sea
             return print(json_encode($resultado));
         }
         // Si no existe
-        //print_r ("\nNO entro en el if\n");
+        print_r ("El usuario no existe\n");
+        $resultado = array("valor" => "false");
+        return print(json_encode($resultado));
     }
 } else {
     header("location:index.php");
