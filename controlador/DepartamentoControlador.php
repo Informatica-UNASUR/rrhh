@@ -24,4 +24,9 @@ class DepartamentoControlador {
     public static function eliminarDepartamento($idDepartamento) {
         return DepartamentoDao::eliminarDepartamento($idDepartamento);
     }
+
+    public static function existeDepartamento($nombreDepartamento) {
+        return DepartamentoDao::existeDepartamento($nombreDepartamento);
+    }
+
 }

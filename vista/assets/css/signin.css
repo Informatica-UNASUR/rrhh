@@ -56,30 +56,20 @@ table.table td a {
     text-decoration: none;
     outline: none !important;
 }
-table.table td a:hover {
-    color: #2196F3;
-}
 
-
-table.table td a.edit {
+#edit:hover {
     color: #FFC107;
 }
-table.table td a.delete_forever {
+#delete:hover {
     color: #F44336;
 }
 table.table td i {
     font-size: 19px;
 }
 
-
-/*
-.modal .modal-header, .modal .modal-body, .modal .modal-footer {
-    padding: 20px 30px;
+#dtDepartamento_info.dataTables_info {
+    font-size: 0.9em;
+    margin-top: -12px;
+    text-align: right;
 }
-
-.modal .modal-footer {
-    background: #ecf0f1;
-    border-radius: 0 0 3px 3px;
-}
-*/
 

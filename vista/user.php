@@ -63,12 +63,12 @@ if (isset($_SESSION["usuario"])) {
                                        data-fecha="<?php echo $fechaAlta ?>"
                                        data-rol="<?php echo $rol ?>"
                                        data-estado="<?php echo $estado ?>">
-                                        <i class="material-icons" data-toggle="tooltip" title="Editar" style="color: #FFC107;">edit</i>
+                                        <i class="material-icons" data-toggle="tooltip" id="edit" title="Editar">edit</i>
                                     </a>
                                     <a href="#" data-toggle="modal" data-target="#eliminarUsuarioModal"
                                        data-id="<?php echo $idUsuario ?>"
                                        data-name="<?php echo $nombre ?>">
-                                        <i class="material-icons" data-toggle="tooltip" title="Eliminar" style="color: #F44336;">delete</i>
+                                        <i class="material-icons" data-toggle="tooltip" id="delete" title="Eliminar">delete</i>
                                     </a>
 
                                 </td>

@@ -16,7 +16,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                             </div>
-                            <input name="txtUsuario" id="usuario" class="form-control" placeholder="Ingrese su usuario" type="text" autofocus required>
+                            <input type="text" name="txtUsuario" id="usuario" class="form-control" placeholder="Ingrese su usuario" required>
                         </div> <!-- input-group.// -->
                     </div> <!-- form-group// -->
                     <div class="form-group">

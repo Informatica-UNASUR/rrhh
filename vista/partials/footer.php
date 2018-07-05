@@ -7,6 +7,7 @@
 <script src="../vendor/dataTables/js/dataTables.bootstrap4.min.js"></script>
 <script type="text/javascript" src="assets/js/overhang.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <!--<script src="assets/js/validate.js"></script>-->
 <script src="assets/js/app.js"></script>
 <script src="assets/js/script.js"></script>

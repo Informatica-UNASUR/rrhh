@@ -1,16 +1,18 @@
-<div id="editarCargoModal" class="modal fade">
+<div id="editarDepartamentoModal2" class="modal fade">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <form id="editarCargo" action="editarCargo.php" method="POST" role="form">
+            <form id="editarDepartamento">
                 <div class="modal-header">
-                    <h4 class="modal-title">Editar Cargo</h4>
+                    <h4 class="modal-title">Editar Departamento</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
+                    <div id="datos_ajax"></div>
                     <div class="form-group">
-                        <label>Nombre del cargo</label>
-                        <input type="text" name="txtNombreCargo"  id="edit_name" class="form-control" required>
-                        <input type="hidden" name="txtIdCargo" id="edit_id" >
+                        <label>Nombre del departamento</label>
+                        <input type="text" name="txtNombreDepartamento"  id="edit_name" class="form-control" required>
+                        <input type="hidden" name="txtIdDepartamento" id="edit_id" >
+                        <input type="hidden" id="opcion" name="opcion" value="modificar">
                     </div>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">

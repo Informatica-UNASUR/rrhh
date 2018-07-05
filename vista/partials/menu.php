@@ -20,23 +20,37 @@
                             <span class="d-md-down-none">Recursos Humanos</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="empleado.php"><i class="fa fa-users" aria-hidden="true"></i> Empleados</a>
+                            <a class="dropdown-item" href="empleados.php"><i class="fa fa-users" aria-hidden="true"></i> Empleados</a>
                             <a class="dropdown-item" href="departamento.php"><i class="fa fa-sitemap" aria-hidden="true"></i> Departamentos</a>
+                            <a class="dropdown-item" href="departamentos.php"><i class="fa fa-sitemap" aria-hidden="true"></i> DepartamentosAjax</a>
                             <a class="dropdown-item" href="cargo.php"><i class="fa fa-briefcase" aria-hidden="true"></i> Cargos</a>
                         </div>
                     </li>
                     <li class="nav-item">
                         <a id="empleado" class="nav-link" href="#">Asistencias</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pagos</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                            <span class="d-md-down-none">Pagos</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="salarios.php"><i class="fa fa-tasks" aria-hidden="true"></i> Administrar salarios</a>
+                            <a class="dropdown-item" href="listado_de_salarios.php"><i class="fa fa-users" aria-hidden="true"></i> Salarios de empleados</a>
+                            <a class="dropdown-item" href="pagos.php"><i class="fa fa-usd" aria-hidden="true"></i> &nbsp;Realizar pago</a>
+                            <a class="dropdown-item" href="pagos.php"><i class="fa fa-file-text-o" aria-hidden="true"></i> Generar recibos</a>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Reportes</a>
                     </li>
                     <?php if($_SESSION["usuario"]["Rol_idRol"] == 1) { ?> <!-- Si el user es admin -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Auditoria</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="d-md-down-none">Auditoria</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="auditoria.php"><i class="fa fa-database" aria-hidden="true"></i> Auditoria</a>
+                            </div>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
@@ -53,7 +67,7 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item" href="#"><i class="fa fa-user"></i><?php echo '&nbsp;&nbsp;'.$_SESSION["usuario"]["usuario"]; ?></a>
-                                <a class="dropdown-item" href="#"><i class="fa fa-key"></i> Actualizar contraseña</a>
+                                <a class="dropdown-item" href="password.php"><i class="fa fa-key"></i> Actualizar contraseña</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="cerrar-sesion.php"><i class="fa fa-sign-out"></i> Cerrar sesión</a>
                             </div>
@@ -65,7 +79,7 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item" href="#"><i class="fa fa-user"></i><?php echo '&nbsp;&nbsp;'. $_SESSION["usuario"]["usuario"]; ?></a>
-                                <a class="dropdown-item" href="#"><i class="fa fa-key"></i> Actualizar contraseña</a>
+                                <a class="dropdown-item" href="password.php"><i class="fa fa-key"></i> Actualizar contraseña</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="cerrar-sesion.php"><i class="fa fa-sign-out"></i> Cerrar sesión</a>
                             </div>

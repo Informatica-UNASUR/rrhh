@@ -19,7 +19,7 @@ if (isset($_SESSION["usuario"])) {
                     <a href="#agregarDepartamentoModal" class="btn btn-sm btn-outline-dark float-right" data-toggle="modal">Agregar departamento</a>
                 </div>
                 <div class="card-body">
-                    <table id="dtDepartamento" class="table table-sm table-hover" style="width:100%">
+                    <table id="dtDefault" class="table table-sm table-hover" style="width:100%">
                         <thead>
                         <tr>
                             <th>#ID</th>

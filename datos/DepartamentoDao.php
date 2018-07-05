@@ -23,9 +23,9 @@ class DepartamentoDao extends Conexion {
         $resultado = sqlsrv_query(self::$conexion, $query) or die( print_r( sqlsrv_errors(), true));
 
         if($resultado) {
-            return true;
+            return $resultado;
         }
-        return false;
+//        return false;
     }
 
     public static function editarDepartamento($departamento) {
@@ -39,14 +39,14 @@ class DepartamentoDao extends Conexion {
         $resultado = sqlsrv_query(self::$conexion, $query) or die( print_r( sqlsrv_errors(), true));
 
         if($resultado) {
-            return true;
+            return $resultado;
         }
-        return false;
+//        return false;
     }
 
     // Metodo para mostrar departamentos
     public static function mostrarDepartamentos() {
-        $q = "SELECT * FROM rrhh_db.departamento";
+        $q = "SELECT idDepartamento, nombreDepartamento FROM rrhh_db.departamento";
 
         self::getConexion();
 
@@ -64,8 +64,22 @@ class DepartamentoDao extends Conexion {
         $resultado = sqlsrv_query(self::$conexion, $q) or die( print_r( sqlsrv_errors(), true));
 
         if($resultado) {
+            return $resultado;
+        }
+//        return false;
+    }
+
+    public static function existeDepartamento($nombreDepartamento) {
+        $q = "SELECT nombreDepartamento FROM rrhh_db.departamento WHERE nombreDepartamento = ('$nombreDepartamento')";
+
+        self::getConexion();
+
+        $resultado = sqlsrv_query(self::$conexion, $q) or die( print_r( sqlsrv_errors(), true));
+
+        if (sqlsrv_has_rows($resultado) != 1) {
+            return false;
+        } else {
             return true;
         }
-        return false;
     }
 }
