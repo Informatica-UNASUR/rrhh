@@ -1,7 +1,7 @@
 <div id="agregarEmpleadoModal" class="modal fade">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form name="add_empleado" id="add_empleado">
+            <form id="agregarEmpleado">
                 <div class="modal-header">
                     <h4 class="modal-title">Agregar Empleado</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -11,7 +11,7 @@
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Datos básicos</a>
                         <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Datos Laborales</a>
-                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
+<!--                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>-->
                     </div>
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
@@ -20,6 +20,7 @@
                             <label class="col-sm-2 col-form-label text-right">Nombre</label>
                             <div class="col-sm-4">
                                 <input type="text" name="txtNombre"  id="name" class="form-control" placeholder="Ingrese el nombre del empleado" required>
+                                <input type="hidden" id="opcion" name="opcion" value="registrar">
                             </div>
                             <label class="col-sm-1 col-form-label">Apellido</label>
                             <div class="col-sm-4">
@@ -33,10 +34,10 @@
                             </div>
                             <label class="col-sm-1 col-form-label">Sexo</label>
                             <div class="col-sm-4">
-                                <select name="cbSexo" id="sexo" class="custom-select">
+                                <select name="cbSexo" id="sexo" class="custom-select" required>
                                     <option value="" selected disabled>--Selecciona--</option>
-                                    <option value="">Masculino</option>
-                                    <option value="">Femenino</option>
+                                    <option value="m">Masculino</option>
+                                    <option value="f">Femenino</option>
                                 </select>
                             </div>
                         </div>
@@ -78,10 +79,14 @@
                         <br><div class="form-group row">
                                 <label class="col-sm-2 col-form-label text-right">Horario</label>
                                 <div class="col-sm-9">
-                                    <select name="cbHorario" id="horario" class="custom-select">
-                                        <option value="" selected disabled>--Selecciona el horario--</option>
-                                        <option value="">Horario#1</option>
-                                        <option value="">Horario#2</option>
+                                    <select name="cbHorario" id="edit_horario" class="custom-select" required>
+                                        <option value="" selected disabled>--Selecciona--</option>
+                                        <?php
+                                        $r = EmpleadoControlador::mostrarHorarios();
+                                        while(($fila = sqlsrv_fetch_array($r)) != NULL) {
+                                            echo '<option value="'.$fila['idHorario'].'">'.'ENTRADA: '.$fila['horaEntrada'].'/SALIDA: '.$fila['horaSalida'].'</option>';
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                             </div>
@@ -89,39 +94,75 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label text-right">Estado civil</label>
                                 <div class="col-sm-9">
-                                    <select name="cbCivil" id="civil" class="custom-select">
-                                        <option value="" selected disabled>--Selecciona el estado--</option>
-                                        <option value="">Estado#1</option>
-                                        <option value="">Estado#2</option>
+                                    <select name="cbCivil" id="edit_civil" class="custom-select" required>
+                                        <option value="" selected disabled>--Selecciona--</option>
+                                        <?php
+                                        $r = EmpleadoControlador::mostrarEstadoCivil();
+                                        while(($fila = sqlsrv_fetch_array($r)) != NULL) {
+                                            echo '<option value="'.$fila['idEstadoCivil'].'">'.$fila['estadoCivil'].'</option>';
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label text-right">Contrato</label>
                                 <div class="col-sm-9">
-                                    <select name="txtContrato" id="contrato" class="custom-select">
-                                        <option value="" selected disabled>--Selecciona el contrato--</option>
-                                        <option value="">Contrato#1</option>
-                                        <option value="">Contrato#2</option>
+                                    <select name="txtContrato" id="edit_contrato" class="custom-select" required>
+                                        <option value="" selected disabled>--Selecciona--</option>
+                                        <?php
+                                        $r = EmpleadoControlador::mostrarContratos();
+                                        while(($fila = sqlsrv_fetch_array($r)) != NULL) {
+                                            echo '<option value="'.$fila['idContrato'].'">'.$fila['tipoContrato'].'</option>';
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                             </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label text-right">Fecha ingreso</label>
                             <div class="col-sm-4">
-                                <input type="text" name="txtFechaIn"  id="ingreso" class="form-control" required>
+                                <input type="date" name="txtFechaIn"  id="ingreso" class="form-control" required>
                             </div>
-                            <label class="col-sm-1 col-form-label">Antiguedad</label>
+                            <label class="col-sm-1 col-form-label">Salario</label>
                             <div class="col-sm-4">
-                                <input type="text" name="txtAntiguedad"  id="antiguedad" class="form-control" required>
+                                <input type="number" name="txtSalario" id="salario" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label text-right">Departamento</label>
+                            <div class="col-sm-9">
+                                <select name="cbDepartamento" id="edit_depto" class="custom-select" required>
+                                    <option value="" selected disabled>--Selecciona--</option>
+                                    <?php
+                                    $r = EmpleadoControlador::mostrarDepartamentos();
+                                    while(($fila = sqlsrv_fetch_array($r)) != NULL) {
+                                        echo '<option value="'.$fila['idDepartamento'].'">'.$fila['nombreDepartamento'].'</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label text-right">Cargo</label>
+                            <div class="col-sm-9">
+                                <select name="cbCargo" id="edit_cargo" class="custom-select" required>
+                                    <option value="" selected disabled>--Selecciona--</option>
+                                    <?php
+                                    $r = EmpleadoControlador::mostrarCargos();
+                                    while(($fila = sqlsrv_fetch_array($r)) != NULL) {
+                                        echo '<option value="'.$fila['idCargo'].'">'.$fila['nombreCargo'].'</option>';
+                                    }
+                                    ?>
+                                </select>
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+<!--                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>-->
                 </div>
 
                 <div class="modal-footer">
-                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+                    <input id="btnCerrar" type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
                     <input type="submit" class="btn btn-success" value="Guardar datos">
                 </div>
             </form>

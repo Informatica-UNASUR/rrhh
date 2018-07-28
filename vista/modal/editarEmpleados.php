@@ -10,17 +10,15 @@
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Datos básicos</a>
-                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Datos Laborales</a>
-                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
                     </div>
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                        <br><div class="form-group row">
+                    <br><div class="form-group row mb-2">
                             <label class="col-sm-2 col-form-label text-right">Nombre</label>
                             <div class="col-sm-4">
                                 <input type="text" name="txtNombre"  id="edit_name" class="form-control" placeholder="Ingrese el nombre del empleado" required>
-                                <input type="hidden" name="txtIdUsuario" id="edit_id" >
+                                <input type="hidden" name="txtIdEmpleado" id="edit_id" >
                                 <input type="hidden" id="opcion" name="opcion" value="modificar">
                             </div>
                             <label class="col-sm-1 col-form-label">Apellido</label>
@@ -28,7 +26,7 @@
                                 <input type="text" name="txtApellido"  id="edit_ape" class="form-control" required>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row mb-2">
                             <label class="col-sm-2 col-form-label text-right">CI</label>
                             <div class="col-sm-4">
                                 <input type="text" name="txtCi"  id="edit_ci" class="form-control" required>
@@ -42,7 +40,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row mb-2">
                             <label class="col-sm-2 col-form-label text-right">Cumpleanos</label>
                             <div class="col-sm-4">
                                 <input type="text" name="fechaNac"  id="edit_fecha" class="form-control">
@@ -52,19 +50,17 @@
                                 <input type="text" name="txtTelefono"  id="edit_telefono" class="form-control" required>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row mb-2">
                             <label class="col-sm-2 col-form-label text-right">Direccion</label>
-                            <div class="col-sm-9">
-                                <textarea name="txtDireccion"  id="edit_direccion" class="form-control" required></textarea>
+                            <div class="col-sm-4">
+                                <input name="txtDireccion"  id="edit_direccion" class="form-control" required>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label text-right">Email</label>
-                            <div class="col-sm-9">
+                            <label class="col-sm-1 col-form-label text-right">Email</label>
+                            <div class="col-sm-4">
                                 <input type="email" name="txtEmail"  id="edit_email" class="form-control" required>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row mb-2">
                             <label class="col-sm-2 col-form-label text-right">Cuenta bancaria</label>
                             <div class="col-sm-4">
                                 <input type="text" name="txtCtaBanco"  id="edit_cta" class="form-control" required>
@@ -74,27 +70,31 @@
                                 <input type="text" name="txtNacionalidad"  id="edit_nacionalidad" class="form-control" required>
                             </div>
                         </div>
-
-                    </div>
-                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                        <br><div class="form-group row">
+                        <div class="form-group row mb-2">
                             <label class="col-sm-2 col-form-label text-right">Horario</label>
-                            <div class="col-sm-9">
-                                <select name="cbHorario" id="edit_horario" class="custom-select">
+                            <div class="col-sm-4">
+                                <select name="cbHorario" id="idHorario" class="custom-select">
                                     <?php
                                     $r = EmpleadoControlador::mostrarHorarios();
                                     while(($fila = sqlsrv_fetch_array($r)) != NULL) {
-                                        echo '<option value="'.$fila['idHorario'].'">'.'ENTRADA: '.$fila['horaEntrada'].'/SALIDA: '.$fila['horaSalida'].'</option>';
+                                        echo '<option value="'.$fila['idHorario'].'">'.'ENT: '.$fila['horaEntrada'].'/SAL: '.$fila['horaSalida'].'</option>';
                                     }
                                     ?>
                                 </select>
                             </div>
+                            <label class="col-sm-1 col-form-label text-right">Estado</label>
+                            <div class="col-sm-4">
+                                <select class="custom-select" name="txtEstado" id="edit_estado" required>
+                                    <option selected value="1">Activado</option>
+                                    <option value="0">Desactivado</option>
+                                </select>
+                            </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row mb-2">
                             <label class="col-sm-2 col-form-label text-right">Estado civil</label>
-                            <div class="col-sm-9">
-                                <select name="cbCivil" id="edit_civil" class="custom-select">
+                            <div class="col-sm-4">
+                                <select name="cbCivil" id="idEstadoCivil" class="custom-select">
                                     <?php
                                     $r = EmpleadoControlador::mostrarEstadoCivil();
                                     while(($fila = sqlsrv_fetch_array($r)) != NULL) {
@@ -103,11 +103,9 @@
                                     ?>
                                 </select>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label text-right">Contrato</label>
-                            <div class="col-sm-9">
-                                <select name="txtContrato" id="edit_contrato" class="custom-select">
+                            <label class="col-sm-1 col-form-label text-right">Contrato</label>
+                            <div class="col-sm-4">
+                                <select name="txtContrato" id="idContrato" class="custom-select">
                                     <?php
                                     $r = EmpleadoControlador::mostrarContratos();
                                     while(($fila = sqlsrv_fetch_array($r)) != NULL) {
@@ -117,44 +115,40 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row mb-2">
                             <label class="col-sm-2 col-form-label text-right">Fecha ingreso</label>
                             <div class="col-sm-4">
                                 <input type="text" name="txtFechaIn"  id="edit_ingreso" class="form-control" required>
                             </div>
-                            <label class="col-sm-1 col-form-label">Antiguedad</label>
+                            <label class="col-sm-1 col-form-label">Salario</label>
                             <div class="col-sm-4">
-<!--                                <input type="text" name="txtAntiguedad"  id="edit_antiguedad" class="form-control" required>-->
+                                <input type="text" name="txtSalario" id="edit_salario" class="form-control" disabled>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row mb-2">
                             <label class="col-sm-2 col-form-label text-right">Departamento</label>
-                            <div class="col-sm-9">
-                                <select name="cbDepartamento" id="edit_dpto" class="form-control">
+                            <div class="col-sm-4">
+                                <select name="cbDepartamento" id="idDepartamento" class="custom-select">
+                                    <option value="" disabled>--Selecciona el departamento--</option>
                                     <?php
                                     $r = EmpleadoControlador::mostrarDepartamentos();
                                     while(($fila = sqlsrv_fetch_array($r)) != NULL) {
                                         echo '<option value="'.$fila['idDepartamento'].'">'.$fila['nombreDepartamento'].'</option>';
                                     }
                                     ?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label text-right">Cargo</label>
-                            <div class="col-sm-9">
-                                <select id="edit_cargo" class="form-control">
+                                </select>                            </div>
+                            <label class="col-sm-1 col-form-label">Cargo</label>
+                            <div class="col-sm-4">
+                                <select name="cbCargo" id="idCargo" class="custom-select">
                                     <?php
                                     $r = EmpleadoControlador::mostrarCargos();
                                     while(($fila = sqlsrv_fetch_array($r)) != NULL) {
                                         echo '<option value="'.$fila['idCargo'].'">'.$fila['nombreCargo'].'</option>';
                                     }
                                     ?>
-                                </select>
-                            </div>
+                                </select>                            </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
                 </div>
 
                 <div class="modal-footer">

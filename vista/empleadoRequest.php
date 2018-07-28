@@ -3,58 +3,26 @@ include '../controlador/EmpleadoControlador.php';
 include '../helps/helps.php';
 
 $opcion = $_POST["opcion"];
-$txtNombreEmpleado = $_POST["txtNombre"];
-$txtApellidoEmpleado = $_POST["txtApellido"];
-$txtCi = $_POST["txtCi"];
-$txtEmail = $_POST["txtEmail"];
 $informacion = [];
 
-if($opcion != 'registrar') {
-    $txtIdEmpleado = $_POST["txtIdUsuario"];
-} else {
-    $txtIdEmpleado = "0";
-}
 
-switch ($opcion) {
-    case 'registrar':
-        $existe = existeDepartamento($txtNombreDepartamento);
-        if ($existe) {
-            $informacion["respuesta"] = "EXISTE";
-            echo json_encode($informacion);
-        } else {
-            agregar($txtNombreEmpleado);
-        }
-        break;
-    case 'modificar':
-        modificar($txtIdEmpleado, $txtNombreEmpleado, $txtApellidoEmpleado, $txtCi, $txtEmail);
-        break;
-    case 'eliminar':
-        eliminar($txtIdEmpleado);
-        break;
-    default:
-        $informacion["respuesta"] = "OPCION VACIA";
-        echo json_encode($informacion);
-        break;
-}
-
-function existeDepartamento($txtNombreEmpleado) {
-    $resultado = DepartamentoControlador::existeDepartamento($txtNombreEmpleado);
-    return $resultado;
-}
-
-function agregar($txtNombreEmpleado) {
-    $resultado = DepartamentoControlador::registrarDepartamento($txtNombreEmpleado);
-    verificar_resultado($resultado);
-}
-
-function modificar($txtIdEmpleado, $txtNombreEmpleado, $txtApellidoEmpleado, $txtCi, $txtEmail) {
-    $resultado = EmpleadoControlador::editarEmpleado($txtIdEmpleado, $txtNombreEmpleado, $txtApellidoEmpleado, $txtCi, $txtEmail);
+if($opcion == 'registrar') {
+    $resultado = EmpleadoControlador::agregarEmpleado($_POST["txtNombre"], $_POST["txtApellido"], $_POST["txtCi"],
+        $_POST["fechaNac"], $_POST["cbSexo"], $_POST["txtTelefono"], $_POST["txtDireccion"], $_POST["txtEmail"],
+        $_POST["txtCtaBanco"], $_POST["txtNacionalidad"], $_POST["cbHorario"], $_POST["cbCivil"], $_POST["txtContrato"],
+        $_POST["txtSalario"],$_POST["txtFechaIn"], $_POST["cbCargo"], $_POST["cbDepartamento"]);
 
     verificar_resultado($resultado);
-}
+} elseif ($opcion == 'modificar') {
+    $resultado = EmpleadoControlador::editarEmpleado($_POST["txtIdEmpleado"] ,$_POST["txtNombre"], $_POST["txtApellido"], $_POST["txtCi"],
+        $_POST["cbSexo"], $_POST["fechaNac"],$_POST["txtTelefono"],$_POST["txtDireccion"],$_POST["txtEmail"],$_POST["txtCtaBanco"],
+        $_POST["txtNacionalidad"], $_POST["cbHorario"], $_POST["txtEstado"], $_POST["cbCivil"], $_POST["txtContrato"],
+        $_POST["txtFechaIn"], $_POST["cbDepartamento"], $_POST["cbCargo"]);
 
-function eliminar($txtIdEmpleado) {
-    $resultado = DepartamentoControlador::eliminarDepartamento($txtIdEmpleado);
+    verificar_resultado($resultado);
+} elseif ($opcion == 'eliminar') {
+    $txtIdEmpleado = $_POST["txtIdEmpleado"];
+    $resultado = EmpleadoControlador::eliminarEmpleado($txtIdEmpleado);
     verificar_resultado($resultado);
 }
 

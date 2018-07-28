@@ -39,6 +39,7 @@ if (isset($_SESSION["usuario"])) {
         </div>
         <?php include 'modal/eliminarEmpleados.php'?>
     </div>
+    <?php include 'modal/agregarEmpleado.php'?>
 </div>
 
 

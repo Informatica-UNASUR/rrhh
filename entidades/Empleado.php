@@ -17,6 +17,74 @@ Class Empleado {
     private $idHorario;
     private $idEstadoCivil;
     private $idContrato;
+    private $salario;
+    private $FechaAsume;
+    private $Cargo_idCargo;
+    private $Departamento_idDepartamento;
+
+    /**
+     * @return mixed
+     */
+    public function getSalario()
+    {
+        return $this->salario;
+    }
+
+    /**
+     * @param mixed $salario
+     */
+    public function setSalario($salario): void
+    {
+        $this->salario = $salario;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFechaAsume()
+    {
+        return $this->FechaAsume;
+    }
+
+    /**
+     * @param mixed $FechaAsume
+     */
+    public function setFechaAsume($FechaAsume): void
+    {
+        $this->FechaAsume = $FechaAsume;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCargoIdCargo()
+    {
+        return $this->Cargo_idCargo;
+    }
+
+    /**
+     * @param mixed $Cargo_idCargo
+     */
+    public function setCargoIdCargo($Cargo_idCargo): void
+    {
+        $this->Cargo_idCargo = $Cargo_idCargo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDepartamentoIdDepartamento()
+    {
+        return $this->Departamento_idDepartamento;
+    }
+
+    /**
+     * @param mixed $Departamento_idDepartamento
+     */
+    public function setDepartamentoIdDepartamento($Departamento_idDepartamento): void
+    {
+        $this->Departamento_idDepartamento = $Departamento_idDepartamento;
+    }
 
     /**
      * @return mixed
