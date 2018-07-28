@@ -63,6 +63,32 @@ table.table td a {
 #delete:hover {
     color: #F44336;
 }
+#assignment:hover {
+    color: #15a499;
+}
+#cheader a {
+    -webkit-transition:all 1.9s ease;
+    -moz-transition:all 1.9s ease;
+    -o-transition:all 1.9s ease;
+    -ms-transition:all 1.9s ease;
+    width:10%;
+}
+#pdfHistoricoPago:hover {
+    color: #a40b18;
+    -webkit-transform:scale(1.25);
+    -moz-transform:scale(1.25);
+    -ms-transform:scale(1.25);
+    -o-transform:scale(1.25);
+    transform:scale(1.25);
+}
+#excelListSalario:hover {
+    color: #0da416;
+    -webkit-transform:scale(1.25);
+    -moz-transform:scale(1.25);
+    -ms-transform:scale(1.25);
+    -o-transform:scale(1.25);
+    transform:scale(1.25);
+}
 table.table td i {
     font-size: 19px;
 }
@@ -71,5 +97,9 @@ table.table td i {
     font-size: 0.9em;
     margin-top: -12px;
     text-align: right;
+}
+
+#dtHistoricoPago tbody td {
+    font-size: 12px;
 }
 

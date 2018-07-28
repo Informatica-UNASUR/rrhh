@@ -21,8 +21,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="empleados.php"><i class="fa fa-users" aria-hidden="true"></i> Empleados</a>
-                            <a class="dropdown-item" href="departamento.php"><i class="fa fa-sitemap" aria-hidden="true"></i> Departamentos</a>
-                            <a class="dropdown-item" href="departamentos.php"><i class="fa fa-sitemap" aria-hidden="true"></i> DepartamentosAjax</a>
+                            <a class="dropdown-item" href="departamentos.php"><i class="fa fa-sitemap" aria-hidden="true"></i> Departamentos</a>
                             <a class="dropdown-item" href="cargo.php"><i class="fa fa-briefcase" aria-hidden="true"></i> Cargos</a>
                         </div>
                     </li>
@@ -35,7 +34,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="salarios.php"><i class="fa fa-tasks" aria-hidden="true"></i> Administrar salarios</a>
-                            <a class="dropdown-item" href="listado_de_salarios.php"><i class="fa fa-users" aria-hidden="true"></i> Salarios de empleados</a>
+                            <a class="dropdown-item" href="listado_de_salarios.php"><i class="fa fa-users" aria-hidden="true"></i> Salarios</a>
                             <a class="dropdown-item" href="pagos.php"><i class="fa fa-usd" aria-hidden="true"></i> &nbsp;Realizar pago</a>
                             <a class="dropdown-item" href="pagos.php"><i class="fa fa-file-text-o" aria-hidden="true"></i> Generar recibos</a>
                         </div>

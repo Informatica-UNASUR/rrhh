@@ -45,41 +45,8 @@ $(document).ready(function() {
 
             }
         });
-       return false;
+        return false;
     }); // Captura el evento
-
-    // $("#eliminarDepartamento").bind("submit", function(){
-    //     $.ajax({
-    //         type: $(this).attr("method"),
-    //         url: $(this).attr("action"),
-    //         data: $(this).serialize(),
-    //         beforeSend: function () {
-    //             $("#eliminarDepartamento button[type=submit]").html("Enviando...");
-    //             $("#eliminarDepartamento button[type=submit]").attr("disabled", "disabled");
-    //         },
-    //         success: function (response) {
-    //             console.log(response);
-    //             if (response.valor == "true") {
-    //                 $("body").overhang({
-    //                     type: "success",
-    //                     message: "Departamento eliminado correctamente 🙂",
-    //                     duration: 1,
-    //                     callback: function () {
-    //                         window.location.href = "departamento.php";
-    //                     }
-    //                 });
-    //             } else {
-    //                 $("body").overhang({
-    //                     type: "error",
-    //                     message: "No eliminado!"
-    //                 });
-    //             }
-    //             $("#eliminarDepartamento button[type=submit]").html("Eliminar");
-    //             $("#eliminarDepartamento button[type=submit]").removeAttr("disabled");
-    //         }
-    //     });
-    //     return false;
-    // });
 
     // Activa boton si no estan vacios
     $("#loginForm input").keyup(function () {
@@ -161,7 +128,182 @@ $(document).ready(function() {
     guardar();
     eliminar();
     agregar();
+    var idEmpleado;
+    var nombreEmpleado;
+
+    $('.cbDepto').change(function () {
+        $('.cbEmpleado').empty();
+        dpto = $('.cbDepto').val();
+        empl = $('.cbEmpleado').val();
+        //$("#cardPago").fadeOut(700);
+        resetFormPagoDetalle();
+        resetearCamposDeduccion();
+        $('#idNewDeduccion').removeAttr('disabled');
+        listarData(0);
+        $.ajax({
+            type: 'POST',
+            url: 'getEmpleado.php',
+            data: 'idDpto='+dpto,
+            success: function (response) {
+                $('.cbEmpleado').html('<option value="" selected disabled>--Selecciona el empleado--</option>');
+                $('.cbEmpleado').append(response);
+            }
+        });
+    });
+
+    $("#listarDeduccion").click(function () {
+        $('#cardData').removeAttr('hidden');
+    });
+
+    $("#CancelAddDevengo").click(function () {
+        resetearCamposDevengo();
+        $('#idNewDevengo').removeAttr('disabled');
+    });
+
+    $("#CancelAddDeduccion").click(function () {
+        resetearCamposDeduccion();
+        $('#idNewDeduccion').removeAttr('disabled');
+    });
+
+    $('#idDpto').change(function () {
+        $('#idEmpleado').removeAttr('disabled');
+    });
+
+    $('#idEmpleado').change(function () {
+        $('#periodoPago').removeAttr('disabled');
+        $('#idNewDeduccion').removeAttr('disabled');
+        $('#idNewDevengo').removeAttr('disabled');
+        $('#listarDeduccion').removeAttr('disabled');
+        $('#listarDevengo').removeAttr('disabled');
+        resetFormPagoDetalle();
+        resetearCamposDeduccion();
+        listarData(0);
+        var selectedOption = this.options[this.selectedIndex];
+        idEmpleado = selectedOption.value;
+        nombreEmpleado = selectedOption.text;
+        //console.log(selectedOption.value + ': ' + selectedOption.text);
+        $('#cardData').removeAttr('hidden');
+    });
+
+    $('#idNewDeduccion').click(function () {
+        $('#fechaDeduccion').val(hoyFecha());
+        $.ajax({
+            type: 'POST',
+            data: 'opcion='+"getAllDeduccion",
+            url: 'getDeduccion.php',
+            success: function (response) {
+                $('#deduccion').html('<option value="" selected disabled>--Selecciona--</option>');
+                $('#deduccion').append(response);
+            }
+        });
+        $('#deduccion').removeAttr('disabled');
+        $('#montoDeduccion').removeAttr('disabled');
+        $('#fechaDeduccion').removeAttr('disabled');
+        $('#obsDeduccion').removeAttr('disabled');
+        $('#addDeduccion').removeAttr('disabled');
+        $('#listarDeduccion').removeAttr('disabled');
+        $('#CancelAddDeduccion').removeAttr('disabled');
+        document.getElementById('deduccion').focus();
+    });
+
+    $('#idNewDevengo').click(function () {
+        $('#fechaDevengo').val(hoyFecha());
+        $.ajax({
+            type: 'POST',
+            url: 'getDevengo.php',
+            // data: 'idEmpl='+empl,
+            success: function (response) {
+                $('#devengo').html('<option value="" selected disabled>--Selecciona--</option>');
+                $('#devengo').append(response);
+            }
+        });
+        $('#devengo').removeAttr('disabled');
+        $('#montoDevengo').removeAttr('disabled');
+        $('#fechaDevengo').removeAttr('disabled');
+        $('#obsDevengo').removeAttr('disabled');
+        $('#addDevengo').removeAttr('disabled');
+        $('#listarDevengo').removeAttr('disabled');
+        $('#CancelAddDevengo').removeAttr('disabled');
+        document.getElementById('devengo').focus();
+    });
+
+    $("#agregarDeduccion").on("submit", function (e) {
+        e.preventDefault();
+        var data = $(this).serialize();
+        data = 'idEmpleado='+idEmpleado+'&'+data;
+        console.log(data);
+        $.ajax({
+            method: "POST",
+            url: "deduccionRequest.php",
+            data: data
+        }).done(function (info) {
+            var json_info = JSON.parse(info);
+            console.log(json_info);
+            if (json_info.respuesta === 'BIEN') {
+                resetearCamposDeduccion();
+            }
+        });
+    });
+
+    $("#agregarDevengo").on("submit", function (e) {
+        e.preventDefault();
+        var data = $(this).serialize();
+        data = 'idEmpleado='+idEmpleado+'&'+data;
+        console.log(data);
+        $.ajax({
+            method: "POST",
+            url: "devengoRequest.php",
+            data: data
+        }).done(function (info) {
+            var json_info = JSON.parse(info);
+            console.log(json_info);
+            if (json_info.respuesta === 'BIEN') {
+                resetearCamposDevengo();
+            }
+        });
+    });
+
+    $("#periodoPago").click(function () {
+        $('#selectData').removeAttr('disabled');
+    });
+
+    $("#actualizarSalario").on("submit", function (e) {
+        e.preventDefault();
+        var data = $(this).serialize();
+        $.ajax({
+            method: "GET",
+            url: "getSalarioEmpleado.php",
+            data: data
+        });
+        resetFormPagoDetalle();
+        listarEmpleados();
+    });
+
+    // Para calcular automaticamente el monto de ips 9%
+    var select = document.getElementById('deduccion');
+    var ips;
+    if(select) { // Validacion para que no arroje un error con el evento addEventListener
+        select.addEventListener('change',
+            function(){
+                $('#montoDeduccion').val('');
+                var selectedOption = this.options[select.selectedIndex];
+                ips = selectedOption.text;
+                if(ips === 'IPS') {
+                    $.ajax({
+                        method: "GET",
+                        url: "getSalario.php",   // url para la peticion
+                        data: "idEmpleado="+idEmpleado
+                    }).done(function (info) {
+                        var json_info = JSON.parse(info);
+                        console.log(json_info);
+                        $('#montoDeduccion').val(formatearMoneda((json_info.Salario*9)/100));
+                    });
+                }
+            });
+    }
+
 });
+var idEmpGlobal;
 
 function checkCampos(obj) {
     var camposRellenados = true;
@@ -172,7 +314,7 @@ function checkCampos(obj) {
             return false;
         }
     });
-    if(camposRellenados == false) {
+    if(camposRellenados === false) {
         return false;
     } else {
         return true;
@@ -211,6 +353,29 @@ var guardar = function () {
 };
 
 var agregar = function () {
+    $("#agregarEmpleado").on("submit", function (e) {
+        e.preventDefault();
+        var data = $(this).serialize();
+        console.log(data);
+        $.ajax({
+            method: "POST",
+            url: "empleadoRequest.php",
+            data: data
+        }).done(function (info) {
+            var json_info = JSON.parse(info);
+            console.log(json_info);
+            if (json_info.respuesta === 'EXISTE') {
+                mensajes(json_info);
+            } else {
+                $('#dtEmpleado').DataTable().ajax.reload();
+                $('#agregarEmpleado').trigger("reset");
+                $('#agregarEmpleadoModal').modal('hide');
+                //$('#nombreDepartamento').val("");
+            }
+            mensajes(json_info);
+        });
+    });
+
     $("#nuevoDepartamento").on("submit", function (e) {
         e.preventDefault();
         var data = $(this).serialize();
@@ -231,6 +396,114 @@ var agregar = function () {
             mensajes(json_info);
         });
     });
+
+    $("#nuevoDeduccion").on("submit", function (e) {
+        e.preventDefault();
+        var data = $(this).serialize();
+        $.ajax({
+            method: "POST",
+            url: "deduccionRequest.php",
+            data: data
+        }).done(function (info) {
+            var json_info = JSON.parse(info);
+            console.log(json_info);
+            $('#agregarDeduccionModal').modal('hide');
+            /*if (json_info.respuesta === 'EXISTE') {
+                mensajes(json_info);
+            } else {
+                $('#dtDepartamento').DataTable().ajax.reload();
+
+                $('#nombreDepartamento').val("");
+            }*/
+            mensajes(json_info);
+        });
+    });
+
+    $("#nuevoDevengo").on("submit", function (e) {
+        e.preventDefault();
+        var data = $(this).serialize();
+        $.ajax({
+            method: "POST",
+            url: "devengoRequest.php",
+            data: data
+        }).done(function (info) {
+            var json_info = JSON.parse(info);
+            console.log(json_info);
+            $('#agregarDevengoModal').modal('hide');
+            /*if (json_info.respuesta === 'EXISTE') {
+                mensajes(json_info);
+            } else {
+                $('#dtDepartamento').DataTable().ajax.reload();
+
+                $('#nombreDepartamento').val("");
+            }*/
+            mensajes(json_info);
+        });
+    });
+
+    $("#cabecera").on("submit", function (e) {
+        $("#cardPago").fadeIn(1000);
+        e.preventDefault();
+        $("#fechaPago").val(hoyFecha());
+        var data = $(this).serialize();
+        var id;
+        console.log(data);
+        $.ajax({
+            method: "POST",
+            url: "getSalario.php",
+            data: data
+        }).done(function (info) {
+            var json_info = JSON.parse(info);
+            console.log(json_info);
+            id = json_info.idEmpleado;
+
+            // Con moneda con formato
+            var salario = formatearMoneda(json_info.Salario);
+            var totalDeduccion = formatearMoneda(json_info.Deduccion);
+            var totalDevengo = formatearMoneda(json_info.Devengo);
+            var TotalPercibido = formatearMoneda(json_info.TotalPercibido);
+            $("#salario").val(salario);
+            $("#totalDeduccion").val(totalDeduccion);
+            $("#totalDevengo").val(totalDevengo);
+            $("#totalPagar").val(TotalPercibido);
+
+            /*
+            // Moneda sin formato
+            $("#salario").val(json_info.Salario);
+            $("#totalDeduccion").val(json_info.Deduccion);
+            $("#totalDevengo").val(json_info.Devengo);
+            $("#totalPagar").val(json_info.TotalPercibido);
+            */
+            var dia = $("#periodoPago").val();
+            var year = dia.substring(0,4);
+            var mes = dia.substring(5,7);
+            var event = new Date(Date.UTC(year,mes));
+            var options = { year: 'numeric', month: 'long'};
+            $("#mesPago").html(event.toLocaleDateString('es-MX', options).toUpperCase());
+            listarData(id);
+        });
+    });
+
+    $("#formPagoDetalle").on("submit", function (e) {
+       e.preventDefault();
+       var id = getId();
+       var periodo = $("#periodoPago").val();
+       var disabled = $(this).find(':input:disabled').removeAttr('disabled');
+       var data = $(this).serialize();
+       console.log(data);
+       disabled.attr('disabled','disabled');
+       data = 'periodo='+periodo+'&'+'idEmpleado='+id+'&'+data;
+       $.ajax({
+           method: "POST",
+           url: "pagoSalarioRequest.php",
+           data: data
+       }).done(function (info) {
+           var json_info = JSON.parse(info);
+           console.log(json_info);
+           resetFormPagoDetalle();
+           listarData(id);
+       });
+    });
 };
 
 var eliminar = function () {
@@ -245,6 +518,20 @@ var eliminar = function () {
             var json_info = JSON.parse(info);
             listarDepartamentos();
             $('#eliminarDepartamentoModal2').modal('hide');
+        });
+    });
+    $("#eliminarEmpleado").on("submit", function (e) {
+        e.preventDefault();
+        var data = $(this).serialize();
+        console.log(data);
+        $.ajax({
+            method: "POST",
+            url: "empleadoRequest.php",
+            data: data
+        }).done(function (info) {
+            var json_info = JSON.parse(info);
+            listarEmpleados();
+            $('#eliminarEmpleadoModal').modal('hide');
         });
     });
 };
@@ -262,7 +549,7 @@ var listarDepartamentos = function () {
         // "<'col-sm-12'p<br/>><'row'<'col-sm-12'i>>"
         "ajax": {
             "method": "POST",
-            "url": "http://localhost:81/dev/rrhh/vista/getdepartamento.php"
+            "url": "getdepartamento.php"
         },
         // Columnas con la que vamos a trabajar
         "columns": [
@@ -284,7 +571,7 @@ var listarAuditoria = function() {
         "destroy": true,
         "ajax": {
             "method": "POST",
-            "url": "http://localhost:81/dev/rrhh/vista/getAuditoria.php"
+            "url": "getAuditoria.php"
         },
         // Columnas con la que vamos a trabajar
         "columns": [
@@ -304,14 +591,14 @@ var listarEmpleados = function() {
         "destroy": true,
         "ajax": {
             "method": "POST",
-            "url": "http://localhost:81/dev/rrhh/vista/getEmpleado.php"
+            "url": "getEmpleado.php"
         },
         "columns": [
             {data: "ci"},
             {"render":
-                function ( data, type, row ) {
-                    return (row['nombre']+' '+row['apellido']);
-                }
+                    function ( data, type, row ) {
+                        return (row['nombre']+' '+row['apellido']);
+                    }
             },
             {data:"nombreDepartamento"},
             {data:"nombreCargo"},
@@ -327,51 +614,16 @@ var listarEmpleados = function() {
             },
             {sDefaultContent: "<td class=\"text-center\">\n" +
                 "<a class=\"editarEmpleado\" href=\"#\" data-toggle=\"modal\" data-target=\"#editarEmpleadoModal2\"><i class=\"material-icons\" data-toggle=\"tooltip\" title=\"Editar\" style=\"color: #FFC107;\">edit</i></a>\n" +
-                "<a class=\"eliminarEmpleado\" href=\"#\" data-toggle=\"modal\" data-target=\"#eliminarEmpleadoModal\"><i class=\"material-icons\" data-toggle=\"tooltip\" title=\"Eliminar\" style=\"color: #F44336;\">delete</i></a>                                    \n" +
+                "<a id=\"desactivarEmpleado\" class=\"eliminarEmpleado\" href=\"#\" data-toggle=\"modal\" data-target=\"#eliminarEmpleadoModal\"><i class=\"material-icons\" data-toggle=\"tooltip\" title=\"Eliminar\" style=\"color: #F44336;\">delete</i></a>                                    \n" +
                 "</td>",
                 "className": "text-center"}
-        ]
-    });
-    var tableNomina = $('#dtNomina').DataTable({
-        paging: false,
-        searching: false,
-        info: false,
-        "destroy": true,
-        "ajax": {
-            "method": "POST",
-            "url": "http://localhost:81/dev/rrhh/vista/getEmpleado.php"
-        },
-        "columns": [
-            // {data: "ci"},
-            {"render":
-                function ( data, type, row ) {
-                    return (row['nombre']+' '+row['apellido']);
-                }
-            }
-            // {data:"nombreDepartamento"},
-            // {data:"nombreCargo"},
-        //     {data:"estado",
-        //         render: function ( data, type, row) {
-        //             if(row['estado'] === 1) {
-        //                 return '<td id="empleadoActivo"><span class="badge badge-success">Activo</span></td>'
-        //             } else {
-        //                 return '<td id="empleadoInactivo"><span class="badge badge-secondary">Inactivo</span></td>'
-        //             }
-        //         },
-        //         "className": "text-center"
-        //     },
-        //     {sDefaultContent: "<td class=\"text-center\">\n" +
-        //         "<a class=\"editarEmpleado\" href=\"#\" data-toggle=\"modal\" data-target=\"#editarEmpleadoModal2\"><i class=\"material-icons\" data-toggle=\"tooltip\" title=\"Editar\" style=\"color: #FFC107;\">edit</i></a>\n" +
-        //         "<a class=\"eliminarEmpleado\" href=\"#\" data-toggle=\"modal\" data-target=\"#eliminarEmpleadoModal\"><i class=\"material-icons\" data-toggle=\"tooltip\" title=\"Eliminar\" style=\"color: #F44336;\">delete</i></a>                                    \n" +
-        //         "</td>",
-        //         "className": "text-center"}
         ]
     });
     var tableSalario = $('#dtSalario').DataTable({
         "destroy": true,
         "ajax": {
             "method": "POST",
-            "url": "http://localhost:81/dev/rrhh/vista/getSalario.php"
+            "url": "getSalarioEmpleado.php"
         },
         "columns": [
             {data: "ci"},
@@ -380,73 +632,167 @@ var listarEmpleados = function() {
                         return (row['nombre']+' '+row['apellido']);
                     }
             },
-            {data:"salarioFijo"},
-            {data:"tipoContrato"},
+            //{data:"salarioFijo"},
+            {"render":
+                    function ( data, type, row ) {
+                        var salary = row['salarioFijo'];
+                        var salario = formatearMoneda(salary);
+                        return (salario);
+                    }
+            },
             {sDefaultContent: "<td class=\"text-center\">\n" +
-                "<a class=\"editarEmpleado\" href=\"#\" data-toggle=\"modal\" data-target=\"#editarEmpleadoModal2\"><i class=\"material-icons\" data-toggle=\"tooltip\" title=\"Editar\" style=\"color: #FFC107;\">edit</i></a>\n" +
+                "<a class=\"editarSalario\"><i class=\"material-icons\" data-toggle=\"tooltip\" title=\"Editar\" style=\"color: #FFC107;\">edit</i></a>\n" +
                 "</td>",
                 "className": "text-center"}
         ]
     });
     accion_empleado("#dtEmpleado tbody", tableEmpleado);
-/*
-    $('#dtEmpleado tbody').on('click', 'tr', function () {
-        var data = tableEmpleado.row( this ).data();
-        alert( 'Ha clickeado sobre la fila ['+data['idEmpleado']+'] NOMBRES: '+data['nombre']+' '+data['apellido'] );
-    } );
-*/
+    accion_salario("#dtSalario tbody", tableSalario);
+    /*
+        $('#dtEmpleado tbody').on('click', 'tr', function () {
+            var data = tableEmpleado.row( this ).data();
+            alert( 'Ha clickeado sobre la fila ['+data['idEmpleado']+'] NOMBRES: '+data['nombre']+' '+data['apellido'] );
+        } );
+    */
+};
+
+var listarData = function (id) {
+    //console.log('el id es: '+id);
+    setId(id);
+    var parametros = {'idEmpleado' : id};
+    var tableNomina = $('#dtHistoricoPago').DataTable({
+        // paging: false,
+        //searching: false,
+        // info: false,
+        "destroy": true,
+        "ajax": {
+            "method": "POST",
+            "data": parametros,
+            "url": "getHistoricoPago.php",
+            "dataSrc": function(data){
+                if(data === "no data"){
+                    return [];
+                }
+                else {
+                    return data.data;
+                }
+            }
+        },
+        "columns": [
+            //{"data": "fechaPago"},
+            {"render":
+                    function ( data, type, row ) {
+                        var periodo;
+                        var dia = row['periodoPago'];
+                        var year = dia.substring(0,4);
+                        var mes = dia.substring(5,7);
+                        var event = new Date(Date.UTC(year,mes));
+                        var options = { year: 'numeric', month: 'long'};
+                        periodo = event.toLocaleDateString('es-MX', options);
+                        return (periodo);
+                    }
+            },
+            {"data": "fechaPago"},
+            // {"data": "Salario"},
+            {"render":
+                    function ( data, type, row ) {
+                        var salary = row['Salario'];
+                        var salario = formatearMoneda(salary);
+                        return (salario);
+                    }
+            },
+            // {"data": "totalDeduccion"},
+            {"render":
+                    function ( data, type, row ) {
+                        var deduccion = row['totalDeduccion'];
+                        return formatearMoneda(deduccion);
+                    }
+            },
+            // {"data": "totalDevengo"},
+            {"render":
+                    function ( data, type, row ) {
+                        var devengo = row['totalDevengo'];
+                        return formatearMoneda(devengo);
+                    }
+            },
+            // {"data": "totalPercibido"}
+            {"render":
+                    function ( data, type, row ) {
+                        var totalPercibido = row['totalPercibido'];
+                        return formatearMoneda(totalPercibido);
+                    }
+            },
+            {sDefaultContent: "<td class=\"text-center\">\n" +
+                "<a class=\"verDetallePago\" href=\"#\" data-toggle=\"modal\" data-target=\"#verDetallePago\"><i id=\"assignment\" class=\"material-icons\" data-toggle=\"tooltip\" title=\"Ver detalles\">assignment</i></a>\n" +
+                "</td>",
+                "className": "text-center"}
+        ]
+    });
 };
 
 var accion_departamento = function (tbody, table) {
     // Cuando se haga click en el boton editar
     $(tbody).on("click", "a.editarDpto", function () {
-       // Obtenemos la data de cada fila seleccionada
-       var data = table.row($(this).parents("tr")).data();
+        // Obtenemos la data de cada fila seleccionada
+        var data = table.row($(this).parents("tr")).data();
         // Seteamos las cajas de texto del modal
         var idDpto = $("#edit_id").val(data.idDepartamento),
             nombre = $("#edit_name").val(data.nombreDepartamento);
     });
     // Cuando se haga click en el boton eliminar
     $(tbody).on("click", "a.eliminarDpto", function () {
-       var data = table.row($(this).parents("tr")).data();
-       var idDpto = $("#id").val(data.idDepartamento),
-           nombre = $("#name").val(data.nombreDepartamento);
-       var nameDepartamento = $(this).parents("tr").find("td").eq(1).text();
-       var dMsg = document.getElementById("d-msg");
+        var data = table.row($(this).parents("tr")).data();
+        var idDpto = $("#id").val(data.idDepartamento),
+            nombre = $("#name").val(data.nombreDepartamento);
+        var nameDepartamento = $(this).parents("tr").find("td").eq(1).text();
+        var dMsg = document.getElementById("d-msg");
         dMsg.innerHTML = nameDepartamento;
     });
 };
 
 var accion_empleado = function (tbody, table) {
     $(tbody).on("click", "a.editarEmpleado", function () {
-       var data = table.row($(this).parents("tr")).data();
-       var idEmpleado = $("#edit_id").val(data.idEmpleado);
-       var nombreEmpleado = $("#edit_name").val(data.nombre);
-       var apellidoEmpleado = $("#edit_ape").val(data.apellido);
-       var ci = $("#edit_ci").val(data.ci);
-       var sexo = $("#edit_sexo").val(data.sexo);
-       var fechaNacimiento = $("#edit_fecha").val(data.fechaNacimiento);
-       var telefono = $("#edit_telefono").val(data.telefono);
-       var direccion = $("#edit_direccion").val(data.direccion);
-       var email = $("#edit_email").val(data.email);
-       var edit_cta = $("#edit_cta").val(data.numCuenta);
-       var nacionalidad = $("#edit_nacionalidad").val(data.nacionalidad);
-       var horario = $("#edit_horario").val(data.Horario_idHorario);
-       var estadoCivil = $("#edit_civil").val(data.EstadoCivil_idEstadoCivil);
-       var contrato = $("#edit_contrato").val(data.Contrato_idContrato);
-       var fechaIn = $("#edit_ingreso").val(data.fechaAsume);
-       var cargo = $("#edit_cargo").val(data.nombreCargo);
-       var departamento = $("#edit_dpto").val(data.nombreDepartamento);
+        var data = table.row($(this).parents("tr")).data();
+        var idEmpleado = $("#edit_id").val(data.idEmpleado);
+        var nombreEmpleado = $("#edit_name").val(data.nombre);
+        var apellidoEmpleado = $("#edit_ape").val(data.apellido);
+        var ci = $("#edit_ci").val(data.ci);
+        var sexo = $("#edit_sexo").val(data.sexo);
+        var fechaNacimiento = $("#edit_fecha").val(data.fechaNacimiento);
+        var telefono = $("#edit_telefono").val(data.telefono);
+        var direccion = $("#edit_direccion").val(data.direccion);
+        var email = $("#edit_email").val(data.email);
+        var edit_cta = $("#edit_cta").val(data.numCuenta);
+        var nacionalidad = $("#edit_nacionalidad").val(data.nacionalidad);
+        var estado = $("#edit_estado").val(data.estado);
+        var horario = $("#idHorario").val(data.Horario_idHorario);
+        var estadoCivil = $("#idEstadoCivil").val(data.EstadoCivil_idEstadoCivil);
+        var contrato = $("#idContrato").val(data.Contrato_idContrato);
+        var fechaIn = $("#edit_ingreso").val(data.fechaAsume);
+        var salario = $("#edit_salario").val(formatearMoneda(data.salarioFijo));
+        var cargo = $("#idCargo").val(data.idCargo);
+        var depto = $("#idDepartamento").val(data.idDepartamento);
 
+        $('#agregarEmpleado').trigger("reset");
     });
     // Cuando se haga click en el boton eliminar
     $(tbody).on("click", "a.eliminarEmpleado", function () {
-       var data = table.row($(this).parents("tr")).data();
-        var idDpto = $("#id").val(data.idDepartamento),
-            nombre = $("#name").val(data.nombreDepartamento);
-        var nameDepartamento = $(this).parents("tr").find("td").eq(1).text();
+        var data = table.row($(this).parents("tr")).data();
+        var idEmplea = $("#id").val(data.idEmpleado);
+        var nombreEmpleado = $(this).parents("tr").find("td").eq(1).text();
+        //var id = $(this).parents("tr").find("td").eq(4).text();
+
         var dMsg = document.getElementById("d-msg");
-        dMsg.innerHTML = nameDepartamento;
+        dMsg.innerHTML = nombreEmpleado;
+    });
+};
+
+var accion_salario = function (tbody, table) {
+    $(tbody).on("click", "a.editarSalario", function () {
+        var data = table.row($(this).parents("tr")).data();
+        var idEmpleado = $("#edit_id").val(data.idEmpleado);
+        var nombre = $("#edit_name").val(data.nombre+' '+data.apellido);
+        var salario = $("#edit_salario").val(formatearMoneda(data.salarioFijo));
     });
 };
 
@@ -459,5 +805,63 @@ var mensajes = function (informacion) {
     $('.msgExiste').html(texto).css({"color": color});
     $('#nombreDepartamento').css({"border-color": color});
 };
+
+function resetearCamposDeduccion() {
+    //$('#idNewDeduccion').attr('disabled', 'disabled');
+    $('#addDeduccion').attr('disabled', 'disabled');
+    $('#deduccion').attr('disabled', 'disabled');
+    $('#deduccion').html('<option value="" selected disabled>--Selecciona--</option>');
+    $('#montoDeduccion').attr('disabled', 'disabled');
+    $('#fechaDeduccion').attr('disabled', 'disabled');
+    $('#obsDeduccion').attr('disabled', 'disabled');
+    $('#CancelAddDeduccion').attr('disabled', 'disabled');
+    $('#montoDeduccion').val('');
+    $('#obsDeduccion').val('');
+    $('#fechaDeduccion').val('');
+}
+
+function resetearCamposDevengo() {
+    //$('#idNewDevengo').attr('disabled', 'disabled');
+    $('#addDevengo').attr('disabled', 'disabled');
+    $('#devengo').attr('disabled', 'disabled');
+    $('#devengo').html('<option value="" selected disabled>--Selecciona--</option>');
+    $('#montoDevengo').attr('disabled', 'disabled');
+    $('#fechaDevengo').attr('disabled', 'disabled');
+    $('#obsDevengo').attr('disabled', 'disabled');
+    $('#CancelAddDevengo').attr('disabled', 'disabled');
+    $('#montoDevengo').val('');
+    $('#obsDevengo').val('');
+    $('#fechaDevengo').val('');
+}
+
+function resetFormPagoDetalle() {
+    $('#salario').val('');
+    $('#totalDeduccion').val('');
+    $('#totalDevengo').val('');
+    $('#totalPagar').val('');
+    $('#edit_name').val('');
+    $('#edit_salario').val('');
+}
+
+function setId(id) {
+    idEmpGlobal = id;
+}
+
+function getId() {
+    return idEmpGlobal;
+}
+
+function hoyFecha() {
+    var now = new Date();
+    var day = ("0" + now.getDate()).slice(-2);
+    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+    return now.getFullYear()+"-"+(month)+"-"+(day) ;
+}
+
+function formatearMoneda(monto) {
+    return Intl.NumberFormat('es-PY').format(monto);
+    // return Intl.NumberFormat('es-PY',{style:'currency',currency:'PYG'}).format(monto);
+}
 
 

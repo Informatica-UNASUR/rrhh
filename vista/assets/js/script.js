@@ -62,7 +62,7 @@ $('#editarDepartamentoModal2').on('shown.bs.modal', function (event) {
 });
 
 $('#eliminarDepartamentoModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget); // Button that triggered the modal
+    var button = $(event.relatedTarget);
 
     var nombreDepartamento = button.data('name');
     $('#name').val(nombreDepartamento);
@@ -163,6 +163,10 @@ $('#eliminarCargoModal').on('show.bs.modal', function (event) {
 $('#editarEmpleadoModal2').on('shown.bs.modal', function (event) {
     // $('#edit_name:text').focus();
     $(this).draggable({ handle: ".modal-header" });
+    var button = $(event.relatedTarget);
+
+    var nombreDepartamento = button.val();
+    $('#edit_depto').val(nombreDepartamento);
 });
 
 // Validaciones
