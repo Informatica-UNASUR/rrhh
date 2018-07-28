@@ -21,6 +21,10 @@ class DepartamentoControlador {
         return DepartamentoDao::mostrarDepartamentos();
     }
 
+    public static function mostrarDptos() {
+        return DepartamentoDao::mostrarDptos();
+    }
+
     public static function eliminarDepartamento($idDepartamento) {
         return DepartamentoDao::eliminarDepartamento($idDepartamento);
     }

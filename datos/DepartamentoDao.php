@@ -55,6 +55,18 @@ class DepartamentoDao extends Conexion {
         return $resultado;
     }
 
+    public static function mostrarDptos() {
+        $q = "select DISTINCT idDepartamento, nombreDepartamento from rrhh_db.departamento d
+              inner join rrhh_db.empleadocargo ec
+              on d.idDepartamento=ec.Departamento_idDepartamento";
+
+        self::getConexion();
+
+        $resultado = sqlsrv_query(self::$conexion, $q) or die( print_r( sqlsrv_errors(), true));
+
+        return $resultado;
+    }
+
     // Metodo para eliminar departamento
     public static function eliminarDepartamento($idDepartamento) {
         $q = "DELETE FROM rrhh_db.departamento WHERE idDepartamento = ('$idDepartamento')";
