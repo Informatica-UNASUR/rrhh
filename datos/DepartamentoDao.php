@@ -56,9 +56,13 @@ class DepartamentoDao extends Conexion {
     }
 
     public static function mostrarDptos() {
-        $q = "select DISTINCT idDepartamento, nombreDepartamento from rrhh_db.departamento d
-              inner join rrhh_db.empleadocargo ec
-              on d.idDepartamento=ec.Departamento_idDepartamento";
+        $q = "select DISTINCT idDepartamento, nombreDepartamento 
+            from rrhh_db.empleado e
+            inner join rrhh_db.empleadocargo ec
+            on e.idEmpleado=ec.Empleado_idEmpleado
+            inner join rrhh_db.departamento d
+            on ec.Departamento_idDepartamento=d.idDepartamento
+            where e.estado = 1";
 
         self::getConexion();
 
