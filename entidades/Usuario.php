@@ -18,7 +18,7 @@ Class Usuario {
     /**
      * @param mixed $idRol
      */
-    public function setIdRol($idRol): void
+    public function setIdRol($idRol)
     {
         $this->idRol = $idRol;
     }

@@ -19,7 +19,7 @@ class Auditoria {
     /**
      * @param mixed $idAuditoria
      */
-    public function setIdAuditoria($idAuditoria): void
+    public function setIdAuditoria($idAuditoria)
     {
         $this->idAuditoria = $idAuditoria;
     }
@@ -35,7 +35,7 @@ class Auditoria {
     /**
      * @param mixed $usuarioAuditoria
      */
-    public function setUsuarioAuditoria($usuarioAuditoria): void
+    public function setUsuarioAuditoria($usuarioAuditoria)
     {
         $this->usuarioAuditoria = $usuarioAuditoria;
     }
@@ -51,7 +51,7 @@ class Auditoria {
     /**
      * @param mixed $fechaHora
      */
-    public function setFechaHora($fechaHora): void
+    public function setFechaHora($fechaHora)
     {
         $this->fechaHora = $fechaHora;
     }
@@ -67,7 +67,7 @@ class Auditoria {
     /**
      * @param mixed $accion
      */
-    public function setAccion($accion): void
+    public function setAccion($accion)
     {
         $this->accion = $accion;
     }
@@ -83,7 +83,7 @@ class Auditoria {
     /**
      * @param mixed $tabla
      */
-    public function setTabla($tabla): void
+    public function setTabla($tabla)
     {
         $this->tabla = $tabla;
     }
@@ -99,7 +99,7 @@ class Auditoria {
     /**
      * @param mixed $registroNro
      */
-    public function setRegistroNro($registroNro): void
+    public function setRegistroNro($registroNro)
     {
         $this->registroNro = $registroNro;
     }

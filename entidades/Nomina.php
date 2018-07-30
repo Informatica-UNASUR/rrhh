@@ -22,7 +22,7 @@ class Nomina {
     /**
      * @param mixed $salario
      */
-    public function setSalario($salario): void
+    public function setSalario($salario)
     {
         $this->salario = $salario;
     }
@@ -38,7 +38,7 @@ class Nomina {
     /**
      * @param mixed $totalDeduccion
      */
-    public function setTotalDeduccion($totalDeduccion): void
+    public function setTotalDeduccion($totalDeduccion)
     {
         $this->totalDeduccion = $totalDeduccion;
     }
@@ -54,7 +54,7 @@ class Nomina {
     /**
      * @param mixed $totalDevengo
      */
-    public function setTotalDevengo($totalDevengo): void
+    public function setTotalDevengo($totalDevengo)
     {
         $this->totalDevengo = $totalDevengo;
     }
@@ -70,7 +70,7 @@ class Nomina {
     /**
      * @param mixed $totalPago
      */
-    public function setTotalPago($totalPago): void
+    public function setTotalPago($totalPago)
     {
         $this->totalPago = $totalPago;
     }
@@ -87,7 +87,7 @@ class Nomina {
     /**
      * @param mixed $idNominaPago
      */
-    public function setIdNominaPago($idNominaPago): void
+    public function setIdNominaPago($idNominaPago)
     {
         $this->idNominaPago = $idNominaPago;
     }
@@ -103,7 +103,7 @@ class Nomina {
     /**
      * @param mixed $Empleado_idEmpleado
      */
-    public function setEmpleadoIdEmpleado($Empleado_idEmpleado): void
+    public function setEmpleadoIdEmpleado($Empleado_idEmpleado)
     {
         $this->Empleado_idEmpleado = $Empleado_idEmpleado;
     }
@@ -119,7 +119,7 @@ class Nomina {
     /**
      * @param mixed $diasTrabajados
      */
-    public function setDiasTrabajados($diasTrabajados): void
+    public function setDiasTrabajados($diasTrabajados)
     {
         $this->diasTrabajados = $diasTrabajados;
     }
@@ -135,7 +135,7 @@ class Nomina {
     /**
      * @param mixed $fechaPago
      */
-    public function setFechaPago($fechaPago): void
+    public function setFechaPago($fechaPago)
     {
         $this->fechaPago = $fechaPago;
     }
@@ -151,7 +151,7 @@ class Nomina {
     /**
      * @param mixed $periodoPago
      */
-    public function setPeriodoPago($periodoPago): void
+    public function setPeriodoPago($periodoPago)
     {
         $this->periodoPago = $periodoPago;
     }
@@ -167,7 +167,7 @@ class Nomina {
     /**
      * @param mixed $observacion
      */
-    public function setObservacion($observacion): void
+    public function setObservacion($observacion)
     {
         $this->observacion = $observacion;
     }

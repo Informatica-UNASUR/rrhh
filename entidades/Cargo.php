@@ -15,7 +15,7 @@ class Cargo {
     /**
      * @param mixed $idCargo
      */
-    public function setIdCargo($idCargo): void
+    public function setIdCargo($idCargo)
     {
         $this->idCargo = $idCargo;
     }
@@ -31,7 +31,7 @@ class Cargo {
     /**
      * @param mixed $nombreCargo
      */
-    public function setNombreCargo($nombreCargo): void
+    public function setNombreCargo($nombreCargo)
     {
         $this->nombreCargo = $nombreCargo;
     }

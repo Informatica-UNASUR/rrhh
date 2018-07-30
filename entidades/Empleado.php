@@ -33,7 +33,7 @@ Class Empleado {
     /**
      * @param mixed $salario
      */
-    public function setSalario($salario): void
+    public function setSalario($salario)
     {
         $this->salario = $salario;
     }
@@ -49,7 +49,7 @@ Class Empleado {
     /**
      * @param mixed $FechaAsume
      */
-    public function setFechaAsume($FechaAsume): void
+    public function setFechaAsume($FechaAsume)
     {
         $this->FechaAsume = $FechaAsume;
     }
@@ -65,7 +65,7 @@ Class Empleado {
     /**
      * @param mixed $Cargo_idCargo
      */
-    public function setCargoIdCargo($Cargo_idCargo): void
+    public function setCargoIdCargo($Cargo_idCargo)
     {
         $this->Cargo_idCargo = $Cargo_idCargo;
     }
@@ -81,7 +81,7 @@ Class Empleado {
     /**
      * @param mixed $Departamento_idDepartamento
      */
-    public function setDepartamentoIdDepartamento($Departamento_idDepartamento): void
+    public function setDepartamentoIdDepartamento($Departamento_idDepartamento)
     {
         $this->Departamento_idDepartamento = $Departamento_idDepartamento;
     }
@@ -97,7 +97,7 @@ Class Empleado {
     /**
      * @param mixed $idEmppleado
      */
-    public function setIdEmppleado($idEmppleado): void
+    public function setIdEmppleado($idEmppleado)
     {
         $this->idEmppleado = $idEmppleado;
     }
@@ -113,7 +113,7 @@ Class Empleado {
     /**
      * @param mixed $nombre
      */
-    public function setNombre($nombre): void
+    public function setNombre($nombre)
     {
         $this->nombre = $nombre;
     }
@@ -129,7 +129,7 @@ Class Empleado {
     /**
      * @param mixed $apellido
      */
-    public function setApellido($apellido): void
+    public function setApellido($apellido)
     {
         $this->apellido = $apellido;
     }
@@ -145,7 +145,7 @@ Class Empleado {
     /**
      * @param mixed $ci
      */
-    public function setCi($ci): void
+    public function setCi($ci)
     {
         $this->ci = $ci;
     }
@@ -161,7 +161,7 @@ Class Empleado {
     /**
      * @param mixed $fechaNacimiento
      */
-    public function setFechaNacimiento($fechaNacimiento): void
+    public function setFechaNacimiento($fechaNacimiento)
     {
         $this->fechaNacimiento = $fechaNacimiento;
     }
@@ -177,7 +177,7 @@ Class Empleado {
     /**
      * @param mixed $sexo
      */
-    public function setSexo($sexo): void
+    public function setSexo($sexo)
     {
         $this->sexo = $sexo;
     }
@@ -193,7 +193,7 @@ Class Empleado {
     /**
      * @param mixed $telefono
      */
-    public function setTelefono($telefono): void
+    public function setTelefono($telefono)
     {
         $this->telefono = $telefono;
     }
@@ -209,7 +209,7 @@ Class Empleado {
     /**
      * @param mixed $direccion
      */
-    public function setDireccion($direccion): void
+    public function setDireccion($direccion)
     {
         $this->direccion = $direccion;
     }
@@ -225,7 +225,7 @@ Class Empleado {
     /**
      * @param mixed $email
      */
-    public function setEmail($email): void
+    public function setEmail($email)
     {
         $this->email = $email;
     }
@@ -241,7 +241,7 @@ Class Empleado {
     /**
      * @param mixed $numCuenta
      */
-    public function setNumCuenta($numCuenta): void
+    public function setNumCuenta($numCuenta)
     {
         $this->numCuenta = $numCuenta;
     }
@@ -257,7 +257,7 @@ Class Empleado {
     /**
      * @param mixed $nacionalidad
      */
-    public function setNacionalidad($nacionalidad): void
+    public function setNacionalidad($nacionalidad)
     {
         $this->nacionalidad = $nacionalidad;
     }
@@ -273,7 +273,7 @@ Class Empleado {
     /**
      * @param mixed $nombreConyuge
      */
-    public function setNombreConyuge($nombreConyuge): void
+    public function setNombreConyuge($nombreConyuge)
     {
         $this->nombreConyuge = $nombreConyuge;
     }
@@ -289,7 +289,7 @@ Class Empleado {
     /**
      * @param mixed $foto
      */
-    public function setFoto($foto): void
+    public function setFoto($foto)
     {
         $this->foto = $foto;
     }
@@ -305,7 +305,7 @@ Class Empleado {
     /**
      * @param mixed $estado
      */
-    public function setEstado($estado): void
+    public function setEstado($estado)
     {
         $this->estado = $estado;
     }
@@ -321,7 +321,7 @@ Class Empleado {
     /**
      * @param mixed $idHorario
      */
-    public function setIdHorario($idHorario): void
+    public function setIdHorario($idHorario)
     {
         $this->idHorario = $idHorario;
     }
@@ -337,7 +337,7 @@ Class Empleado {
     /**
      * @param mixed $idEstadoCivil
      */
-    public function setIdEstadoCivil($idEstadoCivil): void
+    public function setIdEstadoCivil($idEstadoCivil)
     {
         $this->idEstadoCivil = $idEstadoCivil;
     }
@@ -353,7 +353,7 @@ Class Empleado {
     /**
      * @param mixed $idContrato
      */
-    public function setIdContrato($idContrato): void
+    public function setIdContrato($idContrato)
     {
         $this->idContrato = $idContrato;
     }

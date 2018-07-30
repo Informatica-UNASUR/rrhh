@@ -21,7 +21,7 @@ class Deduccion {
     /**
      * @param mixed $idDeduccion
      */
-    public function setIdDeduccion($idDeduccion): void
+    public function setIdDeduccion($idDeduccion)
     {
         $this->idDeduccion = $idDeduccion;
     }
@@ -37,7 +37,7 @@ class Deduccion {
     /**
      * @param mixed $Empleado_idEmpleado
      */
-    public function setEmpleadoIdEmpleado($Empleado_idEmpleado): void
+    public function setEmpleadoIdEmpleado($Empleado_idEmpleado)
     {
         $this->Empleado_idEmpleado = $Empleado_idEmpleado;
     }
@@ -53,7 +53,7 @@ class Deduccion {
     /**
      * @param mixed $TipoDeduccion_idDeduccion
      */
-    public function setTipoDeduccionIdDeduccion($TipoDeduccion_idDeduccion): void
+    public function setTipoDeduccionIdDeduccion($TipoDeduccion_idDeduccion)
     {
         $this->TipoDeduccion_idDeduccion = $TipoDeduccion_idDeduccion;
     }
@@ -69,7 +69,7 @@ class Deduccion {
     /**
      * @param mixed $montoDeduccion
      */
-    public function setMontoDeduccion($montoDeduccion): void
+    public function setMontoDeduccion($montoDeduccion)
     {
         $this->montoDeduccion = $montoDeduccion;
     }
@@ -85,7 +85,7 @@ class Deduccion {
     /**
      * @param mixed $fechaDeduccion
      */
-    public function setFechaDeduccion($fechaDeduccion): void
+    public function setFechaDeduccion($fechaDeduccion)
     {
         $this->fechaDeduccion = $fechaDeduccion;
     }
@@ -101,7 +101,7 @@ class Deduccion {
     /**
      * @param mixed $observacion
      */
-    public function setObservacion($observacion): void
+    public function setObservacion($observacion)
     {
         $this->observacion = $observacion;
     }
@@ -117,7 +117,7 @@ class Deduccion {
     /**
      * @param mixed $idTipoDeduccion
      */
-    public function setIdTipoDeduccion($idTipoDeduccion): void
+    public function setIdTipoDeduccion($idTipoDeduccion)
     {
         $this->idTipoDeduccion = $idTipoDeduccion;
     }
@@ -133,7 +133,7 @@ class Deduccion {
     /**
      * @param mixed $tipoDeduccion
      */
-    public function setTipoDeduccion($tipoDeduccion): void
+    public function setTipoDeduccion($tipoDeduccion)
     {
         $this->tipoDeduccion = $tipoDeduccion;
     }

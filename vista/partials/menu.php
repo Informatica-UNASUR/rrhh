@@ -25,8 +25,17 @@
                             <a class="dropdown-item" href="cargo.php"><i class="fa fa-briefcase" aria-hidden="true"></i> Cargos</a>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a id="empleado" class="nav-link" href="#">Asistencias</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                            <span class="d-md-down-none">Asistencias</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="carga_asistencia.php"><i class="fa fa-tasks" aria-hidden="true"></i> Cargar archivo de asistencias</a>
+                            <!-- <a class="dropdown-item" href="marcaciones.php"><i class="fa fa-users" aria-hidden="true"></i> Marcaciones</a>-->
+                            <a class="dropdown-item" href="calendario.php"><i class="fa fa-calendar" aria-hidden="true"></i> &nbsp;Calendario de asistencias</a>
+                            <a class="dropdown-item" href="solicitudes.php"><i class="fa fa-file-text-o" aria-hidden="true"></i> Solicitudes</a>
+                            <a class="dropdown-item" href="justificados.php"><i class="fa fa-file-text-o" aria-hidden="true"></i> Justificaciones</a>
+                        </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">

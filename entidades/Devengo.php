@@ -21,7 +21,7 @@ class Devengo {
     /**
      * @param mixed $idDevengo
      */
-    public function setIdDevengo($idDevengo): void
+    public function setIdDevengo($idDevengo)
     {
         $this->idDevengo = $idDevengo;
     }
@@ -37,7 +37,7 @@ class Devengo {
     /**
      * @param mixed $Empleado_idEmpleado
      */
-    public function setEmpleadoIdEmpleado($Empleado_idEmpleado): void
+    public function setEmpleadoIdEmpleado($Empleado_idEmpleado)
     {
         $this->Empleado_idEmpleado = $Empleado_idEmpleado;
     }
@@ -53,7 +53,7 @@ class Devengo {
     /**
      * @param mixed $TipoDevengo_idDevengo
      */
-    public function setTipoDevengoIdDevengo($TipoDevengo_idDevengo): void
+    public function setTipoDevengoIdDevengo($TipoDevengo_idDevengo)
     {
         $this->TipoDevengo_idDevengo = $TipoDevengo_idDevengo;
     }
@@ -69,7 +69,7 @@ class Devengo {
     /**
      * @param mixed $montoDevengo
      */
-    public function setMontoDevengo($montoDevengo): void
+    public function setMontoDevengo($montoDevengo)
     {
         $this->montoDevengo = $montoDevengo;
     }
@@ -85,7 +85,7 @@ class Devengo {
     /**
      * @param mixed $fechaDevengo
      */
-    public function setFechaDevengo($fechaDevengo): void
+    public function setFechaDevengo($fechaDevengo)
     {
         $this->fechaDevengo = $fechaDevengo;
     }
@@ -101,7 +101,7 @@ class Devengo {
     /**
      * @param mixed $observacion
      */
-    public function setObservacion($observacion): void
+    public function setObservacion($observacion)
     {
         $this->observacion = $observacion;
     }
@@ -117,7 +117,7 @@ class Devengo {
     /**
      * @param mixed $idTipoDevengo
      */
-    public function setIdTipoDevengo($idTipoDevengo): void
+    public function setIdTipoDevengo($idTipoDevengo)
     {
         $this->idTipoDevengo = $idTipoDevengo;
     }
@@ -133,7 +133,7 @@ class Devengo {
     /**
      * @param mixed $tipoDevengo
      */
-    public function setTipoDevengo($tipoDevengo): void
+    public function setTipoDevengo($tipoDevengo)
     {
         $this->tipoDevengo = $tipoDevengo;
     }
