@@ -23,6 +23,27 @@ class NominaControlador {
         return NominaDao::mostrarNomina($obj_Nomina);
     }
 
+    public static function reporteSalario($idEmpleado, $periodo) {
+        $obj_Nomina = new Nomina();
+        $obj_Nomina->setEmpleadoIdEmpleado($idEmpleado);
+        $obj_Nomina->setPeriodoPago($periodo);
+        return NominaDao::reporteSalario($obj_Nomina);
+    }
+
+    public static function reporteDeduccion($idEmpleado, $periodo) {
+        $obj_Nomina = new Nomina();
+        $obj_Nomina->setEmpleadoIdEmpleado($idEmpleado);
+        $obj_Nomina->setPeriodoPago($periodo);
+        return NominaDao::reporteDeduccion($obj_Nomina);
+    }
+
+    public static function reporteDevengo($idEmpleado, $periodo) {
+        $obj_Nomina = new Nomina();
+        $obj_Nomina->setEmpleadoIdEmpleado($idEmpleado);
+        $obj_Nomina->setPeriodoPago($periodo);
+        return NominaDao::reporteDevengo($obj_Nomina);
+    }
+
     public static function mostrarHistoricoPagos($idEmpleado) {
         $obj_Nomina = new Nomina();
         $obj_Nomina->setEmpleadoIdEmpleado($idEmpleado);

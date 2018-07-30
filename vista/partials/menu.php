@@ -39,8 +39,15 @@
                             <a class="dropdown-item" href="pagos.php"><i class="fa fa-file-text-o" aria-hidden="true"></i> Generar recibos</a>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Reportes</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                            <span class="d-md-down-none">Reportes</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="rEmpleado.php"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Empleados y salarios</a>
+                            <a class="dropdown-item" href="rCargo.php"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Empleados y cargos</a>
+                            <a class="dropdown-item" href="rPago.php"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Liquidacion de salarios</a>
+                        </div>
                     </li>
                     <?php if($_SESSION["usuario"]["Rol_idRol"] == 1) { ?> <!-- Si el user es admin -->
                         <li class="nav-item dropdown">

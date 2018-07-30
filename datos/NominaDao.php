@@ -65,6 +65,78 @@ class NominaDao extends Conexion {
         //return false;
     }
 
+    public static function reporteSalario($nomina) {
+        $idEmpleado      = $nomina->getEmpleadoIdEmpleado();
+        $periodo         = $nomina->getPeriodoPago();
+
+        $query = "{call sp_reporte_salario(?,?)}";
+        $params = array(
+            array($idEmpleado, SQLSRV_PARAM_IN),
+            array($periodo, SQLSRV_PARAM_IN)
+        );
+
+        self::getConexion();
+
+        $resultado = sqlsrv_query(self::$conexion, $query, $params) or die( print_r( sqlsrv_errors(), true));
+
+        $empleado = array();
+        do {
+            while ($row = sqlsrv_fetch_array($resultado, SQLSRV_FETCH_ASSOC)) {
+                $empleado[] = $row;
+            }
+        } while (sqlsrv_next_result($resultado));
+
+        return $empleado;
+    }
+
+    public static function reporteDeduccion($nomina) {
+        $idEmpleado      = $nomina->getEmpleadoIdEmpleado();
+        $periodo         = $nomina->getPeriodoPago();
+
+        $query = "{call sp_reporte_deduccion(?,?)}";
+        $params = array(
+            array($idEmpleado, SQLSRV_PARAM_IN),
+            array($periodo, SQLSRV_PARAM_IN)
+        );
+
+        self::getConexion();
+
+        $resultado = sqlsrv_query(self::$conexion, $query, $params) or die( print_r( sqlsrv_errors(), true));
+
+        $empleado = array();
+        do {
+            while ($row = sqlsrv_fetch_array($resultado, SQLSRV_FETCH_ASSOC)) {
+                $empleado[] = $row;
+            }
+        } while (sqlsrv_next_result($resultado));
+
+        return $empleado;
+    }
+
+    public static function reporteDevengo($nomina) {
+        $idEmpleado      = $nomina->getEmpleadoIdEmpleado();
+        $periodo         = $nomina->getPeriodoPago();
+
+        $query = "{call sp_reporte_devengo(?,?)}";
+        $params = array(
+            array($idEmpleado, SQLSRV_PARAM_IN),
+            array($periodo, SQLSRV_PARAM_IN)
+        );
+
+        self::getConexion();
+
+        $resultado = sqlsrv_query(self::$conexion, $query, $params) or die( print_r( sqlsrv_errors(), true));
+
+        $empleado = array();
+        do {
+            while ($row = sqlsrv_fetch_array($resultado, SQLSRV_FETCH_ASSOC)) {
+                $empleado[] = $row;
+            }
+        } while (sqlsrv_next_result($resultado));
+
+        return $empleado;
+    }
+
     public static function mostrarHistoricoPagos($nomina) {
         $idEmpleado      = $nomina->getEmpleadoIdEmpleado();
 

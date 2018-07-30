@@ -45,6 +45,10 @@ class EmpleadoControlador
         return EmpleadoDao::mostrarSalarios();
     }
 
+    public static function mostrarSalariosEmpleados($idDepartamento) {
+        return EmpleadoDao::mostrarSalariosEmpleados($idDepartamento);
+    }
+
     public static function agregarEmpleado($txtNombreEmpleado, $txtApellidoEmpleado, $txtCi, $fechaNac, $cbSexo, $txtTelefono, $txtDireccion, $txtEmail, $txtCtaBanco, $txtNacionalidad, $cbHorario, $cbCivil, $txtContrato, $txtSalario,$txtFechaIn, $cbCargo, $cbDepartamento)
     {
         $obj_empleado = new Empleado();
