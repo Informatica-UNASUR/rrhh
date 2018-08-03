@@ -130,6 +130,8 @@ $(document).ready(function() {
     agregar();
     var idEmpleado;
     var nombreEmpleado;
+    jQuery('[data-toggle="tooltip"]').tooltip();
+
 
 
     $("#marcaciones").on("submit", function (e) {
@@ -646,7 +648,13 @@ var listarEmpleados = function() {
             "url": "getEmpleado.php"
         },
         "columns": [
-            {data: "ci"},
+            //{data: "ci"},
+            {"render":
+                    function ( data, type, row ) {
+                        var ci = row['ci'];
+                        return formatearMoneda(ci);
+                    }
+            },
             {"render":
                     function ( data, type, row ) {
                         return (row['nombre']+' '+row['apellido']);
@@ -775,7 +783,7 @@ var listarData = function (id) {
                     }
             },
             {sDefaultContent: "<td class=\"text-center\">\n" +
-                "<a class=\"verDetallePago\" href=\"#\" data-toggle=\"modal\" data-target=\"#verDetallePago\"><i id=\"assignment\" class=\"material-icons\" data-toggle=\"tooltip\" title=\"Ver detalles\">assignment</i></a>\n" +
+                "<a class=\"verDetallePago\" href=\"#\" data-target=\"#verDetallePago\"><i id=\"assignment\" class=\"material-icons\" data-toggle=\"tooltip\" title=\"Ver detalles\">assignment</i></a>\n" +
                 "</td>",
                 "className": "text-center"}
         ]
@@ -923,5 +931,9 @@ function formatearMoneda(monto) {
     return Intl.NumberFormat('es-PY').format(monto);
     // return Intl.NumberFormat('es-PY',{style:'currency',currency:'PYG'}).format(monto);
 }
+//
+// jQuery(document).ready(function () {
+//     jQuery('[data-toggle="tooltip"]').tooltip();
+// });
 
 

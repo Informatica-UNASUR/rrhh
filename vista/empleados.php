@@ -14,9 +14,12 @@ if (isset($_SESSION["usuario"])) {
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">
+                <div id="cheader" class="card-header">
                     LISTADO DE EMPLEADOS
                     <a href="#agregarEmpleadoModal" class="btn btn-sm btn-outline-dark float-right" data-toggle="modal">Agregar empleado</a>
+                    <a href="exportarListadoEmpleados.php" class="btn btn-sm btn-outline-success float-right" data-toggle="tooltip" data-placement="left" title="Exportar a excel" download>
+                        <i class="fa fa-file-excel-o fa-lg" aria-hidden="true"></i>
+                    </a>
                 </div>
                 <div class="card-body">
                     <table id="dtEmpleado" class="table table-sm table-hover" style="width:100%">
@@ -24,7 +27,6 @@ if (isset($_SESSION["usuario"])) {
                         <tr>
                             <th>CI</th>
                             <th>Funcionario</th>
-<!--                            <th>CI</th>-->
                             <th>Departamento</th>
                             <th>Cargo</th>
                             <th class="text-center">Estado</th>

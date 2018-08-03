@@ -60,7 +60,7 @@ if (isset($_SESSION["usuario"])) {
                                                 </select>
                                             </div>
                                             <div class="col-sm-0">
-                                                <a href="#agregarDevengoModal" class="btn btn-outline-dark float-none" data-toggle="modal"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                                                <a href="#agregarDevengoModal" class="btn btn-outline-dark float-none" data-toggle="modal"><i class="fa fa-plus-circle fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="Agregar nuevo tipo de asignación"></i></a>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -103,7 +103,7 @@ if (isset($_SESSION["usuario"])) {
                                                 </select>
                                             </div>
                                             <div class="col-sm-0">
-                                                <a href="#agregarDeduccionModal" class="btn btn-outline-dark float-none" data-toggle="modal"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                                                <a href="#agregarDeduccionModal" class="btn btn-outline-dark float-none" data-toggle="modal"><i class="fa fa-plus-circle fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="Agregar nuevo tipo de descuento"></i></a>
                                             </div>
                                         </div>
                                         <div class="form-group row">

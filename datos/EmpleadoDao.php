@@ -24,7 +24,7 @@ class EmpleadoDao extends Conexion {
             inner join rrhh_db.cargo c
             on ec.Cargo_idCargo=c.idCargo
             inner join rrhh_db.departamento d
-            on ec.Departamento_idDepartamento=d.idDepartamento";
+            on ec.Departamento_idDepartamento=d.idDepartamento order by nombreDepartamento";
 
         self::getConexion();
 
@@ -114,6 +114,37 @@ class EmpleadoDao extends Conexion {
         $resultado = sqlsrv_query(self::$conexion, $q) or die( print_r( sqlsrv_errors(), true));
 
         return $resultado;
+    }
+
+
+    public static function mostrarSalariosEmpleados($idDepartamento) {
+        if($idDepartamento == '0') { // Todos los departamentos
+            $id = 'e.estado = 1';
+        } else {
+            $id = "d.idDepartamento=".$idDepartamento." and e.estado = 1";
+        }
+        $q = "select idEmpleado, ci, nombre, apellido, salarioFijo, nombreDepartamento, nombreCargo
+              from rrhh_db.empleado e
+              join rrhh_db.empleadocargo ec
+              on e.idEmpleado=ec.Empleado_idEmpleado
+              join rrhh_db.Departamento d 
+              on ec.Departamento_idDepartamento=d.idDepartamento
+              join rrhh_db.cargo c
+              on ec.Cargo_idCargo=c.idCargo
+              where ".$id."order by nombre asc";
+
+        self::getConexion();
+
+        $resultado = sqlsrv_query(self::$conexion, $q) or die( print_r( sqlsrv_errors(), true));
+
+        $empleado = array();
+        do {
+            while ($row = sqlsrv_fetch_array($resultado, SQLSRV_FETCH_ASSOC)) {
+                $empleado[] = $row;
+            }
+        } while (sqlsrv_next_result($resultado));
+
+        return $empleado;
     }
 
     public static function actualizarSalario($dato) {

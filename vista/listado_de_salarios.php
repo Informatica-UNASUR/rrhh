@@ -20,7 +20,9 @@ if (isset($_SESSION["usuario"])) {
                             <div class="card">
                                 <div id="cheader" class="card-header" style="background-color: white">
                                     LISTADO DE SALARIOS
-                                    <a id="pdf" class="btn float-right border-0" data-toggle="tooltip" title="Exportar a pdf"><i class="fa fa-file-pdf-o fa-lg" aria-hidden="true"></i></a>
+                                    <a href="exportarListadoSalarios.php" class="btn btn-sm btn-outline-success float-right" data-toggle="tooltip" data-placement="left" title="Exportar a excel" download>
+                                        <i class="fa fa-file-excel-o fa-lg" aria-hidden="true"></i>
+                                    </a>
                                 </div>
                                 <div class="card-body">
                                     <table id="dtSalario" class="table table-sm table-hover" style="width:100%">
