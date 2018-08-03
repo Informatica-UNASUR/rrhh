@@ -131,6 +131,17 @@ $(document).ready(function() {
     var idEmpleado;
     var nombreEmpleado;
 
+
+    $("#marcaciones").on("submit", function (e) {
+        e.preventDefault();
+        //$("#cardPago").fadeIn(1000);
+        var data = $("#fecha").val();
+        //setFecha(data);
+        listarMarcaciones(data);
+    });
+
+
+
     $('.cbDepto').change(function () {
         $('.cbEmpleado').empty();
         dpto = $('.cbDepto').val();
@@ -304,6 +315,7 @@ $(document).ready(function() {
 
 });
 var idEmpGlobal;
+var fechaMarcacion;
 
 function checkCampos(obj) {
     var camposRellenados = true;
@@ -441,21 +453,23 @@ var agregar = function () {
         });
     });
 
+
+
     $("#cabecera").on("submit", function (e) {
-        $("#cardPago").fadeIn(1000);
-        e.preventDefault();
-        $("#fechaPago").val(hoyFecha());
-        var data = $(this).serialize();
-        var id;
-        console.log(data);
-        $.ajax({
-            method: "POST",
-            url: "getSalario.php",
-            data: data
-        }).done(function (info) {
-            var json_info = JSON.parse(info);
-            console.log(json_info);
-            id = json_info.idEmpleado;
+                $("#cardPago").fadeIn(1000);
+                e.preventDefault();
+                $("#fechaPago").val(hoyFecha());
+                var data = $(this).serialize();
+                var id;
+                console.log(data);
+                $.ajax({
+                    method: "POST",
+                    url: "getSalario.php",
+                    data: data
+                }).done(function (info) {
+                    var json_info = JSON.parse(info);
+                    console.log(json_info);
+                    id = json_info.idEmpleado;
 
             // Con moneda con formato
             var salario = formatearMoneda(json_info.Salario);
@@ -582,6 +596,44 @@ var listarAuditoria = function() {
             {"data":"nombreColumna"},
             {"data":"nuevaDescripcion"},
             {"data":"antiguaDescripcion"}
+        ]
+    });
+};
+
+var listarMarcaciones = function ($f) {
+    $("#cardPago").fadeIn(1000);
+    parametro = $("#fecha").val();
+    parametro = {'fecha' : parametro};
+    console.log(parametro);
+    var tableMarcaciones = $('#dtMarcaciones').DataTable({
+        // paging: false,
+        //searching: false,
+        // info: false,
+        "destroy": true,
+        "ajax": {
+            "method": "POST",
+            "url": "getMarcaciones.php",
+            "dataSrc": function(data){
+                if(data === "no data"){
+                    return [];
+                }
+                else {
+                    return data.data;
+                }
+            }
+        },
+        // Columnas con la que vamos a trabajar
+        "columns": [
+            {"data":"fecha"},
+            {"render":
+                    function ( data, type, row ) {
+                        return (row['nombre']+' '+row['apellido']);
+                    }
+            },
+            {"data":"horaEntrada"},
+            {"data":"horaSalida"},
+            {"data":"horaEntrada2"},
+            {"data":"horaSalida2"}
         ]
     });
 };
@@ -849,6 +901,14 @@ function setId(id) {
 
 function getId() {
     return idEmpGlobal;
+}
+
+function setFecha(fecha) {
+    fechaMarcacion = fecha;
+}
+
+function getFecha() {
+    return fechaMarcacion;
 }
 
 function hoyFecha() {

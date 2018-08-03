@@ -36,6 +36,22 @@ class AsistenciaDao extends Conexion
         }
     }
 
+    public static function mostrarMarcaciones() {
+
+        $query = "select fecha, nombre, apellido, horaEntrada, horaSalida, horaEntrada2, horaSalida2 
+                  from rrhh_db.marcacion m inner join rrhh_db.empleado e
+                  on m.Empleado_idEmpleado=e.idEmpleado";
+
+        self::getConexion();
+
+        $resultado = sqlsrv_query(self::$conexion, $query) or die( print_r( sqlsrv_errors(), true));
+
+        if($resultado) {
+            return $resultado;
+        }
+        //return false;
+    }
+
     // Metodo para mostrar deduccions
     /*public static function mostrarDevengos()
     {

@@ -14,6 +14,10 @@ class AsistenciaControlador {
         return AsistenciaDao::insertarMarcacion($obj_marcacion);
     }
 
+    public static function mostrarMarcaciones() {
+        return AsistenciaDao::mostrarMarcaciones();
+    }
+
     // Mostrar departamentos
 /*    public static function mostrarDevengos() {
         return DevengoDao::mostrarDevengos();
